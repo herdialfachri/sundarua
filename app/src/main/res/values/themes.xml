@@ -3,7 +3,31 @@
     <style name="Base.Theme.Sundarua" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <!-- Set Poppins as default font for all TextViews -->
+        <item name="android:textViewStyle">@style/PoppinsTextViewStyle</item>
     </style>
 
     <style name="Theme.Sundarua" parent="Base.Theme.Sundarua" />
+
+    <!-- Default TextView Style -->
+    <style name="PoppinsTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Style for Label TextViews (e.g., "Sorangan:", "Batur:") -->
+    <style name="LabelTextView" parent="PoppinsTextViewStyle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+    </style>
+
+    <!-- Style for Value TextViews (e.g., the actual words) -->
+    <style name="ValueTextView" parent="PoppinsTextViewStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

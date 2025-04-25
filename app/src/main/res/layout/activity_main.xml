@@ -13,7 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:iconifiedByDefault="false"
-        app:queryHint="Search Words" />
+        app:queryHint="Pilarian didieu" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvWords"
