@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "842216562238",
+    "project_id": "sundarua-id",
+    "storage_bucket": "sundarua-id.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842216562238:android:5bdf984ef4804ef9693b6f",
+        "android_client_info": {
+          "package_name": "com.example.sundarua"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCte7nBpovgVKs4IF0IPG_WVpea59gsC4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
