@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: WordAdapter
     private lateinit var searchView: SearchView
-    private var listWord : List<Word> = emptyList()
+    private var listWord: List<Word> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +25,26 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.rvWords)
         searchView = findViewById(R.id.searchView)
         recyclerView.layoutManager = LinearLayoutManager(this)
+        getData()
 
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                lifecycleScope.launch {
+                    newText?.let {
+                        adapter.filterList(it)
+                    }
+                }
+
+                return true
+            }
+        })
+    }
+
+    private fun getData(){
         lifecycleScope.launch {
             try {
                 val response = ApiClient.apiService.getWords()
@@ -36,17 +55,5 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Gagal ambil data", Toast.LENGTH_SHORT).show()
             }
         }
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let {
-                    adapter.filterList(it)
-                }
-                return true
-            }
-        })
     }
 }
