@@ -1,9 +1,12 @@
 package com.example.sundarua.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sundarua.R
 import com.example.sundarua.adapter.QuizListAdapter
 import com.example.sundarua.databinding.ActivityQuizBinding
 import com.example.sundarua.model.QuizModel
@@ -19,9 +22,19 @@ class QuizActivity : AppCompatActivity() {
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val backToMainBtn = findViewById<ImageView>(R.id.back_main_btn)
+
+        backToMainBtn.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         quizModelList = mutableListOf()
         getDataFromFirebase()
     }
+
+
 
     private fun setupRecyclerView() {
         binding.progressBar.visibility = View.GONE

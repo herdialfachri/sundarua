@@ -1,6 +1,8 @@
 package com.example.sundarua.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +29,14 @@ class WordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_word)
+
+        val backToMainBtn = findViewById<ImageView>(R.id.back_main_btn)
+
+        backToMainBtn.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         recyclerView = findViewById(R.id.rvWords)
         searchView = findViewById(R.id.searchView)
