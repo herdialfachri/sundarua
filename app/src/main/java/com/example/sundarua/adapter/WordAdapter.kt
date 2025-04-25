@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sundarua.R
 import com.example.sundarua.data.Word
 
-class WordAdapter(private val list: List<Word>) : RecyclerView.Adapter<WordAdapter.ViewHolder>() {
+class WordAdapter(private var list: List<Word>) : RecyclerView.Adapter<WordAdapter.ViewHolder>() {
+    private var filteredList: List<Word> = list
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val soranganText: TextView = view.findViewById(R.id.tvSorangan)
@@ -24,14 +25,29 @@ class WordAdapter(private val list: List<Word>) : RecyclerView.Adapter<WordAdapt
         return ViewHolder(view)
     }
 
-    override fun getItemCount() = list.size
+    override fun getItemCount() = filteredList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val word = list[position]
+        val word = filteredList[position]
         holder.soranganText.text = word.sorangan
         holder.baturText.text = word.batur
         holder.lomaText.text = word.loma
         holder.bindoText.text = word.bindo
         holder.englishText.text = word.english
+    }
+
+    fun filterList(query: String) {
+        filteredList = if (query.isEmpty()) {
+            list
+        } else {
+            list.filter {
+                it.sorangan.contains(query, ignoreCase = true) ||
+                        it.batur.contains(query, ignoreCase = true) ||
+                        it.loma.contains(query, ignoreCase = true) ||
+                        it.bindo.contains(query, ignoreCase = true) ||
+                        it.english.contains(query, ignoreCase = true)
+            }
+        }
+        notifyDataSetChanged()
     }
 }
