@@ -89,7 +89,7 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
         val clickedBtn = view as Button
         if (clickedBtn.id == R.id.next_btn) {
             if (selectedAnswer.isEmpty()) {
-                Toast.makeText(applicationContext, "Please select an answer to continue", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Pilih heula soalna!", Toast.LENGTH_SHORT).show()
                 return
             }
 
@@ -115,7 +115,7 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
             scoreProgressText.text = "$percentage%"
 
             if (percentage >= 60) {
-                scoreTitle.text = "Congrats! You have passed"
+                scoreTitle.text = "Ngiring sumringah! hade pisan"
                 scoreTitle.setTextColor(Color.BLUE)
 
                 // ✅ Tambahkan koin dan level HANYA kalau lulus
@@ -125,12 +125,12 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
                 val newLevel = currentLevel + 1
                 saveCoinAndLevel(newCoin, newLevel)
             } else {
-                scoreTitle.text = "Oops! You have failed"
+                scoreTitle.text = "Hayu diajar deui sing rajin"
                 scoreTitle.setTextColor(Color.RED)
                 // Tidak menambah koin dan level
             }
 
-            scoreSubtitle.text = "$score out of $totalQuestions are correct"
+            scoreSubtitle.text = "$score ti $totalQuestions jawaban anu bener"
 
             finishBtn.setOnClickListener {
                 val intent = Intent(this@StartQuizActivity, MainActivity::class.java)

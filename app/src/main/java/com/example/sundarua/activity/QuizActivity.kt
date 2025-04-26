@@ -45,7 +45,7 @@ class QuizActivity : AppCompatActivity() {
         binding.progressBar.visibility = View.VISIBLE
 
         // Ganti URL Firebase dengan region yang sesuai
-        val database = FirebaseDatabase.getInstance("https://quizzapp-ac988-default-rtdb.asia-southeast1.firebasedatabase.app")
+        val database = FirebaseDatabase.getInstance("https://sundarua-id-default-rtdb.asia-southeast1.firebasedatabase.app/")
         val reference = database.reference
 
         reference.get()
