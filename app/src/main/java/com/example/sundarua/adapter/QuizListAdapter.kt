@@ -17,11 +17,23 @@ class QuizListAdapter(private val quizModelList : List<QuizModel>) :
                 quizTitleText.text = model.title
                 quizSubtitleText.text = model.subtitle
                 quizTimeText.text = model.time + " min"
+
                 root.setOnClickListener {
-                    val intent  = Intent(root.context,StartQuizActivity::class.java)
-                    StartQuizActivity.questionModelList = model.questionList
-                    StartQuizActivity.time = model.time
-                    root.context.startActivity(intent)
+                    val context = root.context
+                    val builder = android.app.AlertDialog.Builder(context)
+                    builder.setTitle("Kapastian")
+                    builder.setMessage("Badé ngawitan kuis ieu?")
+                    builder.setPositiveButton("Leres") { dialog, _ ->
+                        val intent = Intent(context, StartQuizActivity::class.java)
+                        StartQuizActivity.questionModelList = model.questionList
+                        StartQuizActivity.time = model.time
+                        context.startActivity(intent)
+                        dialog.dismiss()
+                    }
+                    builder.setNegativeButton("Henteu") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    builder.create().show()
                 }
             }
         }
