@@ -23,6 +23,7 @@ class WordActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: WordAdapter
     private lateinit var searchView: SearchView
+    private lateinit var progressBar: android.widget.ProgressBar
     private var listWord: List<Word> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +41,7 @@ class WordActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.rvWords)
         searchView = findViewById(R.id.searchView)
+        progressBar = findViewById(R.id.progressBar)
         recyclerView.layoutManager = LinearLayoutManager(this)
         getData()
 
@@ -54,21 +56,23 @@ class WordActivity : AppCompatActivity() {
                         adapter.filterList(it)
                     }
                 }
-
                 return true
             }
         })
     }
 
-    private fun getData(){
+    private fun getData() {
         lifecycleScope.launch {
+            progressBar.visibility = android.view.View.VISIBLE
             try {
                 val response = ApiClient.apiService.getWords()
                 listWord = response.words
                 adapter = WordAdapter(listWord)
                 recyclerView.adapter = adapter
             } catch (e: Exception) {
-                Toast.makeText(this@WordActivity, "Gagal ambil data", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@WordActivity, "Antosan sakedap nuju nampilkeun data", Toast.LENGTH_SHORT).show()
+            } finally {
+                progressBar.visibility = android.view.View.GONE
             }
         }
     }

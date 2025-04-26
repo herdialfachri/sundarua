@@ -50,6 +50,11 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, QuizActivity::class.java)
                 startActivity(intent)
             }
+
+            coinTextView.setOnClickListener {
+                val intent = Intent(this, RewardActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
