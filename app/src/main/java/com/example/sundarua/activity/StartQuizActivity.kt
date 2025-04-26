@@ -1,37 +1,36 @@
 package com.example.sundarua.activity
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sundarua.R
-import com.example.sundarua.databinding.ActivityQuizBinding
 import com.example.sundarua.databinding.ActivityStartQuizBinding
 import com.example.sundarua.databinding.ScoreDialogBinding
 import com.example.sundarua.model.QuestionModel
 
-class StartQuizActivity : AppCompatActivity(),View.OnClickListener {
+class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object {
-        var questionModelList : List<QuestionModel> = listOf()
-        var time : String = ""
+        var questionModelList: List<QuestionModel> = listOf()
+        var time: String = ""
     }
 
-    lateinit var binding: ActivityStartQuizBinding
-
-    var currentQuestionIndex = 0;
-    var selectedAnswer = ""
-    var score = 0;
+    private lateinit var binding: ActivityStartQuizBinding
+    private var currentQuestionIndex = 0
+    private var selectedAnswer = ""
+    private var score = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStartQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         binding.apply {
             btn0.setOnClickListener(this@StartQuizActivity)
             btn1.setOnClickListener(this@StartQuizActivity)
@@ -44,35 +43,33 @@ class StartQuizActivity : AppCompatActivity(),View.OnClickListener {
         startTimer()
     }
 
-    private fun startTimer(){
+    private fun startTimer() {
         val totalTimeInMillis = time.toInt() * 60 * 1000L
-        object : CountDownTimer(totalTimeInMillis,1000L){
+        object : CountDownTimer(totalTimeInMillis, 1000L) {
             override fun onTick(millisUntilFinished: Long) {
-                val seconds = millisUntilFinished /1000
-                val minutes = seconds/60
+                val seconds = millisUntilFinished / 1000
+                val minutes = seconds / 60
                 val remainingSeconds = seconds % 60
-                binding.timerIndicatorTextview.text = String.format("%02d:%02d", minutes,remainingSeconds)
-
+                binding.timerIndicatorTextview.text = String.format("%02d:%02d", minutes, remainingSeconds)
             }
 
             override fun onFinish() {
-                //Finish the quiz
+                finishQuiz()
             }
-
         }.start()
     }
 
-    private fun loadQuestions(){
+    private fun loadQuestions() {
         selectedAnswer = ""
-        if(currentQuestionIndex == questionModelList.size){
+        if (currentQuestionIndex == questionModelList.size) {
             finishQuiz()
             return
         }
 
         binding.apply {
-            questionIndicatorTextview.text = "Question ${currentQuestionIndex+1}/ ${questionModelList.size} "
+            questionIndicatorTextview.text = "Question ${currentQuestionIndex + 1}/${questionModelList.size}"
             questionProgressIndicator.progress =
-                ( currentQuestionIndex.toFloat() / questionModelList.size.toFloat() * 100 ).toInt()
+                (currentQuestionIndex.toFloat() / questionModelList.size.toFloat() * 100).toInt()
             questionTextview.text = questionModelList[currentQuestionIndex].question
             btn0.text = questionModelList[currentQuestionIndex].options[0]
             btn1.text = questionModelList[currentQuestionIndex].options[1]
@@ -82,7 +79,6 @@ class StartQuizActivity : AppCompatActivity(),View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
-
         binding.apply {
             btn0.setBackgroundColor(getColor(R.color.gray))
             btn1.setBackgroundColor(getColor(R.color.gray))
@@ -91,42 +87,55 @@ class StartQuizActivity : AppCompatActivity(),View.OnClickListener {
         }
 
         val clickedBtn = view as Button
-        if(clickedBtn.id==R.id.next_btn){
-            //next button is clicked
-            if(selectedAnswer.isEmpty()){
-                Toast.makeText(applicationContext,"Please select answer to continue",Toast.LENGTH_SHORT).show()
-                return;
+        if (clickedBtn.id == R.id.next_btn) {
+            if (selectedAnswer.isEmpty()) {
+                Toast.makeText(applicationContext, "Please select an answer to continue", Toast.LENGTH_SHORT).show()
+                return
             }
-            if(selectedAnswer == questionModelList[currentQuestionIndex].correct){
+
+            if (selectedAnswer == questionModelList[currentQuestionIndex].correct) {
                 score++
-                Log.i("Score of quiz",score.toString())
             }
+
             currentQuestionIndex++
             loadQuestions()
-        }else{
-            //options button is clicked
+        } else {
             selectedAnswer = clickedBtn.text.toString()
             clickedBtn.setBackgroundColor(getColor(R.color.orange))
         }
     }
 
-    private fun finishQuiz(){
+    private fun finishQuiz() {
         val totalQuestions = questionModelList.size
-        val percentage = ((score.toFloat() / totalQuestions.toFloat() ) *100 ).toInt()
+        val percentage = ((score.toFloat() / totalQuestions.toFloat()) * 100).toInt()
 
-        val dialogBinding  = ScoreDialogBinding.inflate(layoutInflater)
+        val dialogBinding = ScoreDialogBinding.inflate(layoutInflater)
         dialogBinding.apply {
             scoreProgressIndicator.progress = percentage
-            scoreProgressText.text = "$percentage %"
-            if(percentage>60){
+            scoreProgressText.text = "$percentage%"
+
+            if (percentage >= 60) {
                 scoreTitle.text = "Congrats! You have passed"
                 scoreTitle.setTextColor(Color.BLUE)
-            }else{
+
+                // ✅ Tambahkan koin dan level HANYA kalau lulus
+                val currentCoin = getCoin()
+                val currentLevel = getLevel()
+                val newCoin = currentCoin + 100
+                val newLevel = currentLevel + 1
+                saveCoinAndLevel(newCoin, newLevel)
+            } else {
                 scoreTitle.text = "Oops! You have failed"
                 scoreTitle.setTextColor(Color.RED)
+                // Tidak menambah koin dan level
             }
+
             scoreSubtitle.text = "$score out of $totalQuestions are correct"
+
             finishBtn.setOnClickListener {
+                val intent = Intent(this@StartQuizActivity, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
                 finish()
             }
         }
@@ -135,6 +144,23 @@ class StartQuizActivity : AppCompatActivity(),View.OnClickListener {
             .setView(dialogBinding.root)
             .setCancelable(false)
             .show()
+    }
 
+    private fun getCoin(): Int {
+        val sharedPref = getSharedPreferences("game_data", MODE_PRIVATE)
+        return sharedPref.getInt("coin", 0)
+    }
+
+    private fun getLevel(): Int {
+        val sharedPref = getSharedPreferences("game_data", MODE_PRIVATE)
+        return sharedPref.getInt("level", 1) // default level mulai dari 1
+    }
+
+    private fun saveCoinAndLevel(coin: Int, level: Int) {
+        val sharedPref = getSharedPreferences("game_data", MODE_PRIVATE)
+        sharedPref.edit()
+            .putInt("coin", coin)
+            .putInt("level", level)
+            .apply()
     }
 }

@@ -34,8 +34,6 @@ class QuizActivity : AppCompatActivity() {
         getDataFromFirebase()
     }
 
-
-
     private fun setupRecyclerView() {
         binding.progressBar.visibility = View.GONE
         adapter = QuizListAdapter(quizModelList)

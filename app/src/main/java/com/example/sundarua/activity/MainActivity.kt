@@ -10,6 +10,12 @@ import com.example.sundarua.R
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var greetingTextView: TextView
+    private lateinit var coinTextView: TextView
+    private lateinit var levelTextView: TextView
+    private lateinit var toWordBtn: Button
+    private lateinit var toQuizBtn: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,32 +25,47 @@ class MainActivity : AppCompatActivity() {
         val name = sharedPref.getString("user_name", null) // Jika null, berarti belum mengisi
 
         if (name == null) {
-            // Jika nama belum diisi, arahkan ke IdentityActivity
             val intent = Intent(this, IdentityActivity::class.java)
             startActivity(intent)
-            finish() // Pastikan MainActivity tidak dapat diakses setelah IdentityActivity
+            finish()
         } else {
-            // Jika nama sudah diisi, tampilkan nama pada greeting
-            val greetingTextView = findViewById<TextView>(R.id.greeting)
+            greetingTextView = findViewById(R.id.greeting)
+            coinTextView = findViewById(R.id.coinTv)
+            levelTextView = findViewById(R.id.levelTv)
+            toWordBtn = findViewById(R.id.toWordBtn)
+            toQuizBtn = findViewById(R.id.toQuizBtn)
+
+            // Set nama pengguna
             greetingTextView.text = "Sampurasun, $name!"
-        }
 
-        // Temukan tombol berdasarkan ID-nya
-        val toWordBtn = findViewById<Button>(R.id.toWordBtn)
-        val toQuizBtn = findViewById<Button>(R.id.toQuizBtn)
+            // Set coin dan level
+            updateCoinAndLevel()
 
-        // Set OnClickListener untuk toWordBtn
-        toWordBtn.setOnClickListener {
-            // Membuat Intent untuk berpindah ke WordActivity
-            val intent = Intent(this, WordActivity::class.java)
-            startActivity(intent)
-        }
+            toWordBtn.setOnClickListener {
+                val intent = Intent(this, WordActivity::class.java)
+                startActivity(intent)
+            }
 
-        // Set OnClickListener untuk toQuizBtn
-        toQuizBtn.setOnClickListener {
-            // Membuat Intent untuk berpindah ke QuizActivity
-            val intent = Intent(this, QuizActivity::class.java)
-            startActivity(intent)
+            toQuizBtn.setOnClickListener {
+                val intent = Intent(this, QuizActivity::class.java)
+                startActivity(intent)
+            }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateCoinAndLevel() // Refresh coin dan level setiap kembali ke MainActivity
+    }
+
+    private fun updateCoinAndLevel() {
+        // Ambil data coin dan level dari shared preferences atau game data
+        val gamePref = getSharedPreferences("game_data", Context.MODE_PRIVATE)
+        val coin = gamePref.getInt("coin", 0)
+        val level = gamePref.getInt("level", 1)
+
+        // Update TextView
+        coinTextView.text = "Coin: $coin"
+        levelTextView.text = "Level: $level"
     }
 }
