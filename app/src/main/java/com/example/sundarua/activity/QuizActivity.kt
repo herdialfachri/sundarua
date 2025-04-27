@@ -46,7 +46,7 @@ class QuizActivity : AppCompatActivity() {
 
         // Ganti URL Firebase dengan region yang sesuai
         val database = FirebaseDatabase.getInstance("https://sundarua-id-default-rtdb.asia-southeast1.firebasedatabase.app/")
-        val reference = database.reference
+        val reference = database.reference.child("quizzes")
 
         reference.get()
             .addOnSuccessListener { dataSnapshot ->
