@@ -20,13 +20,14 @@
             android:id="@+id/back_main_btn"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/baseline_arrow_back_white_24" />
+            android:src="@drawable/baseline_arrow_back_white_24"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/quizText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hadiah"
+            android:text="@string/hadiah"
             android:letterSpacing="0.1"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -39,7 +40,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tukerkeun hadiah"
+        android:text="@string/tukerkeun_hadiah"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginTop="80dp" />
@@ -50,7 +51,7 @@
         android:textSize="14sp"
         android:textStyle="italic"
         android:textColor="@color/dark_gray"
-        android:text="Pencet tombol ieu kanggo nuker hadiah" />
+        android:text="@string/alert_hadiah" />
 
     <Button
         android:id="@+id/getBookBtn"
@@ -58,7 +59,7 @@
         android:layout_height="70dp"
         android:layout_marginTop="20dp"
         style="@style/PoppinsButtonRegularStyle"
-        android:text="Buku 200 Coin" />
+        android:text="@string/buku_200_coin" />
 
         <Button
             android:id="@+id/getPencilBtn"
@@ -66,13 +67,13 @@
             android:layout_height="70dp"
             android:layout_marginTop="8dp"
             style="@style/PoppinsButtonRegularStyle"
-            android:text="Pensil 100 Coin" />
+            android:text="@string/pensil_100_coin" />
 
         <TextView
             android:id="@+id/claimTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Riwayat Abdi:"
+            android:text="@string/riwayat_abdi"
             android:textSize="18sp"
             android:layout_marginTop="38dp"
             android:textStyle="bold" />
@@ -84,16 +85,3 @@
             android:orientation="vertical" />
 
 </LinearLayout>
-
-
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    android:id="@+id/rootLayout"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:orientation="vertical"-->
-<!--    android:padding="24dp">-->
-
-
-
-<!--</LinearLayout>-->

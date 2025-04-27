@@ -22,4 +22,11 @@
     <string name="nami_panggilan">Nami panggilan:</string>
     <string name="sundarua_app">Sundarua App</string>
     <string name="versi_1_0">versi 1.0</string>
+    <string name="hadiah">Hadiah</string>
+    <string name="tukerkeun_hadiah">Tukerkeun hadiah</string>
+    <string name="alert_hadiah">Pencet tombol ieu kanggo nuker hadiah</string>
+    <string name="buku_200_coin">Buku 200 Coin</string>
+    <string name="pensil_100_coin">Pensil 100 Coin</string>
+    <string name="riwayat_abdi">Riwayat Abdi:</string>
+    <string name="bereskeun_pananyaan_dihandap_ieu">Bereskeun pananyaan dihandap ieu</string>
 </resources>

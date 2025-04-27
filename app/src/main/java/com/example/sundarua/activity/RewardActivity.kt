@@ -81,7 +81,7 @@ class RewardActivity : AppCompatActivity() {
 
             showClaimHistory()
         } else {
-            Toast.makeText(this, "Koin teu cukup $itemName!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Koin kanggo nukerkeun $itemName te cukup!", Toast.LENGTH_SHORT).show()
         }
     }
 
