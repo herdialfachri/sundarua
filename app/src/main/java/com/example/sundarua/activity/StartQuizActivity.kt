@@ -116,7 +116,7 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
 
             if (percentage >= 60) {
                 scoreTitle.text = "Ngiring sumringah! hade pisan"
-                scoreTitle.setTextColor(Color.BLUE)
+                scoreTitle.setTextColor(Color.BLACK)
 
                 // ✅ Tambahkan koin dan level HANYA kalau lulus
                 val currentCoin = getCoin()
@@ -126,7 +126,7 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
                 saveCoinAndLevel(newCoin, newLevel)
             } else {
                 scoreTitle.text = "Hayu diajar deui sing rajin"
-                scoreTitle.setTextColor(Color.RED)
+                scoreTitle.setTextColor(Color.BLACK)
                 // Tidak menambah koin dan level
             }
 

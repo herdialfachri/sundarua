@@ -1,14 +1,17 @@
 <resources>
     <string name="app_name">Sundarua</string>
-    <string name="ayo_latihan_kuis">Hayu Latihan Kuis</string>
-    <string name="ayo_belajar_kata">Hayu Diajar Kecap</string>
+    <string name="latihan_kuis">Latihan Kuis</string>
+    <string name="belajar_kata">Diajar Kecap</string>
     <string name="home_slug">Diajar Matak Rame jeung Sundarua!</string>
     <string name="motivation">Diajar unggal poe, jadi budak nu pinuh élmu!</string>
     <string name="aksara_sunda">Aksara Sunda</string>
-    <string name="level">Lv 1</string>
-    <string name="user_profile">Sampurasun, Herdi</string>
     <string name="word_header">Diajar Kecap</string>
     <string name="kuis">Kuis</string>
     <string name="soal">Soal!</string>
     <string name="quiz_slug">Jawab pertanyaana, kanggo ngumpulkeun poinna!</string>
+    <string name="salajengna">Salajengna</string>
+    <string name="tulis_nama">Tulis nami anjeun di dieu</string>
+    <string name="press_button">Pencet tombol ieu upami atos rengse</string>
+    <string name="next">Lajengkeun</string>
+    <string name="finish">Rengse</string>
 </resources>
