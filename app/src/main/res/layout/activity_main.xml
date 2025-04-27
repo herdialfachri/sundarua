@@ -51,7 +51,7 @@
         android:layout_marginEnd="64dp"
         android:text="@string/home_slug"
         android:textColor="@color/white"
-        android:textSize="44sp"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/influenceText2"
         app:layout_constraintEnd_toEndOf="parent"

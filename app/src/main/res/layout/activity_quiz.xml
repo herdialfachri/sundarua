@@ -8,18 +8,17 @@
     android:padding="16dp"
     tools:context=".activity.QuizActivity">
 
-    <!-- Header bagian atas: Arrow + Teks Kuis -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="24dp">
 
         <ImageView
             android:id="@+id/back_main_btn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/baseline_arrow_back_white_24"
             tools:ignore="ContentDescription" />
 
@@ -31,7 +30,7 @@
             android:letterSpacing="0.1"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="26sp"
+            android:textSize="20sp"
             android:layout_gravity="center" />
     </FrameLayout>
 
