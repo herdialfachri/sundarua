@@ -128,7 +128,7 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
             scoreProgressText.text = "$percentage%"
 
             if (percentage >= 60) {
-                scoreTitle.text = "Ngiring sumringah! hade pisan"
+                scoreTitle.text = "Ngiring bingah! hade pisan"
                 scoreTitle.setTextColor(Color.BLACK)
 
                 val currentCoin = getCoin()

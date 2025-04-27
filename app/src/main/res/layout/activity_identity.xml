@@ -7,6 +7,17 @@
     android:background="@drawable/bgidentity"
     tools:context=".activity.IdentityActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sundarua_app"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="34sp"
+        android:textColor="@color/main_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/avatarImg" />
+
     <ImageView
         android:id="@+id/avatarImg"
         android:layout_width="0dp"
@@ -25,7 +36,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:textColor="@color/black"
-        tools:text="versi 1.0"
+        android:text="@string/versi_1_0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:fontFamily="@font/poppins_bold"
-        tools:text="Nami panggilan:"
+        android:text="@string/nami_panggilan"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/nameEditText"

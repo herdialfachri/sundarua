@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sundarua.R
 import java.text.SimpleDateFormat
@@ -29,22 +30,35 @@ class RewardActivity : AppCompatActivity() {
         claimHistoryLayout = findViewById(R.id.claimHistoryLayout)
 
         getBookBtn.setOnClickListener {
-            claimReward(200, "Buku")
+            showConfirmationDialog(200, "Buku")
         }
 
         getPencilBtn.setOnClickListener {
-            claimReward(100, "Pensil")
+            showConfirmationDialog(100, "Pensil")
         }
 
         showClaimHistory()
 
         val backToMainBtn = findViewById<ImageView>(R.id.back_main_btn)
-
         backToMainBtn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
+    }
+
+    private fun showConfirmationDialog(price: Int, itemName: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Tukerkeun Hadiah")
+        builder.setMessage("Bade nukerkeun $itemName sareng $price koin?")
+        builder.setPositiveButton("Leres") { dialog, _ ->
+            claimReward(price, itemName)
+            dialog.dismiss()
+        }
+        builder.setNegativeButton("Sanes") { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.create().show()
     }
 
     private fun claimReward(price: Int, itemName: String) {
@@ -55,21 +69,19 @@ class RewardActivity : AppCompatActivity() {
             val newCoin = coin - price
             sharedPref.edit().putInt("coin", newCoin).apply()
 
-            // Generate kode unik
             val code = generateUniqueCode()
 
-            // Simpan riwayat claim
             val rewardPref = getSharedPreferences("reward_data", Context.MODE_PRIVATE)
-            val previousHistory = rewardPref.getStringSet("claim_history", mutableSetOf()) ?: mutableSetOf()
+            val previousHistory = rewardPref.getStringSet("claim_history", setOf())?.toMutableSet() ?: mutableSetOf()
             previousHistory.add("$itemName - Kode: $code")
-            rewardPref.edit().putStringSet("claim_history", previousHistory).apply()
 
-            Toast.makeText(this, "Berhasil mengambil $itemName!\nKode: $code", Toast.LENGTH_SHORT).show()
+            rewardPref.edit().putStringSet("claim_history", previousHistory.toSet()).apply()
 
-            // Refresh tampilkan riwayat terbaru
+            Toast.makeText(this, "Hadiah $itemName atos dicandak!\nKode: $code", Toast.LENGTH_SHORT).show()
+
             showClaimHistory()
         } else {
-            Toast.makeText(this, "Coin tidak cukup untuk membeli $itemName!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Koin teu cukup $itemName!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -79,7 +91,7 @@ class RewardActivity : AppCompatActivity() {
     }
 
     private fun showClaimHistory() {
-        claimHistoryLayout.removeAllViews() // Clear riwayat sebelumnya
+        claimHistoryLayout.removeAllViews()
 
         val rewardPref = getSharedPreferences("reward_data", Context.MODE_PRIVATE)
         val claimHistory = rewardPref.getStringSet("claim_history", setOf()) ?: setOf()
@@ -93,7 +105,7 @@ class RewardActivity : AppCompatActivity() {
             }
         } else {
             val noClaimText = TextView(this)
-            noClaimText.text = "Belum ada hadiah yang di-claim."
+            noClaimText.text = "Teu acan aya hadiah"
             noClaimText.textSize = 16f
             claimHistoryLayout.addView(noClaimText)
         }
