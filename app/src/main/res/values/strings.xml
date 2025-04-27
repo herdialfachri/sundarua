@@ -7,11 +7,16 @@
     <string name="aksara_sunda">Aksara Sunda</string>
     <string name="word_header">Diajar Kecap</string>
     <string name="kuis">Kuis</string>
-    <string name="soal">Soal!</string>
+    <string name="soal">Pananyaan</string>
     <string name="quiz_slug">Jawab pertanyaana, kanggo ngumpulkeun poinna!</string>
     <string name="salajengna">Salajengna</string>
     <string name="tulis_nama">Tulis nami anjeun di dieu</string>
     <string name="press_button">Pencet tombol ieu upami atos rengse</string>
     <string name="next">Lajengkeun</string>
     <string name="finish">Rengse</string>
+    <string name="sorangan">Sorangan:</string>
+    <string name="batur">Batur:</string>
+    <string name="loma">Loma:</string>
+    <string name="b_indonesia">B. Indonesia:</string>
+    <string name="inggris">Inggris:</string>
 </resources>

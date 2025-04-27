@@ -6,9 +6,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginVertical="6dp"
     android:elevation="2dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="10dp"
-    app:cardCornerRadius="8dp">
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    app:cardCornerRadius="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
                 style="@style/LabelTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Sorangan:"
+                android:text="@string/sorangan"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,7 +50,7 @@
                 style="@style/LabelTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Batur:"
+                android:text="@string/batur"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -75,7 +75,8 @@
                 style="@style/LabelTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Loma:"
+                android:text="@string/loma"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -100,7 +101,7 @@
                 style="@style/LabelTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="B. Indonesia:"
+                android:text="@string/b_indonesia"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -125,7 +126,7 @@
                 style="@style/LabelTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Inggris:"
+                android:text="@string/inggris"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

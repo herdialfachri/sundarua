@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="4dp"
     android:elevation="10dp"
+    android:backgroundTint="@color/gray"
     app:cardCornerRadius="24dp">
 
     <RelativeLayout

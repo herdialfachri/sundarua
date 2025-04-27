@@ -2,6 +2,7 @@ package com.example.sundarua.activity
 
 import android.content.Intent
 import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
@@ -26,6 +27,8 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
     private var selectedAnswer = ""
     private var score = 0
 
+    private var mediaPlayer: MediaPlayer? = null // ⬅️ Tambahkan MediaPlayer
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStartQuizBinding.inflate(layoutInflater)
@@ -38,6 +41,11 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
             btn3.setOnClickListener(this@StartQuizActivity)
             nextBtn.setOnClickListener(this@StartQuizActivity)
         }
+
+        // ⬇️ Mulai putar musik saat kuis mulai
+        mediaPlayer = MediaPlayer.create(this, R.raw.manukdadali)
+        mediaPlayer?.isLooping = true
+        mediaPlayer?.start()
 
         loadQuestions()
         startTimer()
@@ -106,6 +114,11 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun finishQuiz() {
+        // ⬇️ Berhentikan musik saat kuis selesai
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
+
         val totalQuestions = questionModelList.size
         val percentage = ((score.toFloat() / totalQuestions.toFloat()) * 100).toInt()
 
@@ -118,7 +131,6 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
                 scoreTitle.text = "Ngiring sumringah! hade pisan"
                 scoreTitle.setTextColor(Color.BLACK)
 
-                // ✅ Tambahkan koin dan level HANYA kalau lulus
                 val currentCoin = getCoin()
                 val currentLevel = getLevel()
                 val newCoin = currentCoin + 100
@@ -127,7 +139,6 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 scoreTitle.text = "Hayu diajar deui sing rajin"
                 scoreTitle.setTextColor(Color.BLACK)
-                // Tidak menambah koin dan level
             }
 
             scoreSubtitle.text = "$score ti $totalQuestions jawaban anu bener"
@@ -153,7 +164,7 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun getLevel(): Int {
         val sharedPref = getSharedPreferences("game_data", MODE_PRIVATE)
-        return sharedPref.getInt("level", 1) // default level mulai dari 1
+        return sharedPref.getInt("level", 1)
     }
 
     private fun saveCoinAndLevel(coin: Int, level: Int) {
@@ -162,5 +173,13 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
             .putInt("coin", coin)
             .putInt("level", level)
             .apply()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // ⬇️ Pastikan musik berhenti kalau user keluar dari activity
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
     }
 }

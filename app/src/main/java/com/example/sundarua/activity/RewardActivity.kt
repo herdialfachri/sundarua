@@ -1,8 +1,10 @@
 package com.example.sundarua.activity
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -35,6 +37,14 @@ class RewardActivity : AppCompatActivity() {
         }
 
         showClaimHistory()
+
+        val backToMainBtn = findViewById<ImageView>(R.id.back_main_btn)
+
+        backToMainBtn.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun claimReward(price: Int, itemName: String) {
