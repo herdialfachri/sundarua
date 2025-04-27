@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var levelTextView: TextView
     private lateinit var toWordBtn: Button
     private lateinit var toQuizBtn: Button
+    private lateinit var toAksaraBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
             levelTextView = findViewById(R.id.levelTv)
             toWordBtn = findViewById(R.id.toWordBtn)
             toQuizBtn = findViewById(R.id.toQuizBtn)
+            toAksaraBtn = findViewById(R.id.toAksaraBtn)
 
             // Set nama pengguna
             greetingTextView.text = "Sampurasun, $name!"
@@ -48,6 +50,11 @@ class MainActivity : AppCompatActivity() {
 
             toQuizBtn.setOnClickListener {
                 val intent = Intent(this, QuizActivity::class.java)
+                startActivity(intent)
+            }
+
+            toAksaraBtn.setOnClickListener {
+                val intent = Intent(this, AksaraActivity::class.java)
                 startActivity(intent)
             }
 

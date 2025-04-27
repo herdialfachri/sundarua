@@ -66,12 +66,12 @@
         android:text="@string/motivation"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/toStoryBtn"
-        app:layout_constraintEnd_toEndOf="@+id/toStoryBtn"
-        app:layout_constraintStart_toStartOf="@+id/toStoryBtn" />
+        app:layout_constraintBottom_toTopOf="@+id/toAksaraBtn"
+        app:layout_constraintEnd_toEndOf="@+id/toAksaraBtn"
+        app:layout_constraintStart_toStartOf="@+id/toAksaraBtn" />
 
     <Button
-        android:id="@+id/toStoryBtn"
+        android:id="@+id/toAksaraBtn"
         style="@style/PoppinsButtonBoldStyle"
         android:layout_width="match_parent"
         android:layout_height="80dp"

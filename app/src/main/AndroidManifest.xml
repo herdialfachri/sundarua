@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Sundarua"
         tools:targetApi="31">
         <activity
+            android:name=".activity.AksaraActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.RewardActivity"
             android:exported="false" />
         <activity
