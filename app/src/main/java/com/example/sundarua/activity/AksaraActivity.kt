@@ -8,44 +8,79 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sundarua.adapter.AksaraAdapter
 import com.example.sundarua.databinding.ActivityAksaraBinding
 import com.example.sundarua.model.AksaraModel
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class AksaraActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAksaraBinding
-    private val aksaraList = mutableListOf<AksaraModel>()
-    private lateinit var adapter: AksaraAdapter
+
+    private lateinit var ngalagenaAdapter: AksaraAdapter
+    private lateinit var swaraAdapter: AksaraAdapter
+    private lateinit var rarangkenAdapter: AksaraAdapter
+    private lateinit var angkaAdapter: AksaraAdapter
+    private lateinit var sasatoanAdapter: AksaraAdapter
+
+    private val ngalagenaList = ArrayList<AksaraModel>()
+    private val swaraList = ArrayList<AksaraModel>()
+    private val rarangkenList = ArrayList<AksaraModel>()
+    private val angkaList = ArrayList<AksaraModel>()
+    private val sasatoanList = ArrayList<AksaraModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAksaraBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Set up RecyclerView
-        adapter = AksaraAdapter(aksaraList)
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.adapter = adapter
+        setupRecyclerViews()
 
-        // Ambil data dari Firebase
-        getAksaraData()
+        // Load data dari semua node
+        getAksaraData("aksara_ngalagena", ngalagenaList, ngalagenaAdapter)
+        getAksaraData("aksara_swara", swaraList, swaraAdapter)
+        getAksaraData("rarangken", rarangkenList, rarangkenAdapter)
+        getAksaraData("angka", angkaList, angkaAdapter)
+        getAksaraData("sasatoan", sasatoanList, sasatoanAdapter)
     }
 
-    private fun getAksaraData() {
+    private fun setupRecyclerViews() {
+        ngalagenaAdapter = AksaraAdapter(ngalagenaList)
+        swaraAdapter = AksaraAdapter(swaraList)
+        rarangkenAdapter = AksaraAdapter(rarangkenList)
+        angkaAdapter = AksaraAdapter(angkaList)
+        sasatoanAdapter = AksaraAdapter(sasatoanList)
+
+        binding.recyclerViewNgalagena.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewNgalagena.adapter = ngalagenaAdapter
+
+        binding.recyclerViewSwara.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewSwara.adapter = swaraAdapter
+
+        binding.recyclerViewRarangken.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewRarangken.adapter = rarangkenAdapter
+
+        binding.recyclerViewAngka.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewAngka.adapter = angkaAdapter
+
+        binding.recyclerViewSasatoan.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewSasatoan.adapter = sasatoanAdapter
+    }
+
+    private fun getAksaraData(nodeName: String, list: ArrayList<AksaraModel>, adapter: AksaraAdapter) {
         binding.progressBar.visibility = View.VISIBLE
 
-        // Firebase reference untuk mengambil data aksara
         val database = FirebaseDatabase.getInstance("https://sundarua-id-default-rtdb.asia-southeast1.firebasedatabase.app/")
-        val aksaraRef = database.reference.child("aksara_ngalagena")
+        val aksaraRef = database.reference.child(nodeName)
 
         aksaraRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                aksaraList.clear()
-
+                list.clear()
                 if (snapshot.exists()) {
                     for (aksaraSnapshot in snapshot.children) {
                         val aksara = aksaraSnapshot.getValue(AksaraModel::class.java)
                         if (aksara != null) {
-                            aksaraList.add(aksara)
+                            list.add(aksara)
                         }
                     }
                     adapter.notifyDataSetChanged()
