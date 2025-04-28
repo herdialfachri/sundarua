@@ -1,17 +1,17 @@
 package com.example.sundarua.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sundarua.R
 import com.example.sundarua.adapter.AksaraAdapter
 import com.example.sundarua.databinding.ActivityAksaraBinding
 import com.example.sundarua.model.AksaraModel
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 
 class AksaraActivity : AppCompatActivity() {
 
@@ -29,6 +29,9 @@ class AksaraActivity : AppCompatActivity() {
     private val angkaList = ArrayList<AksaraModel>()
     private val sasatoanList = ArrayList<AksaraModel>()
 
+    private var loadedDataCount = 0
+    private val totalDataNodes = 5
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAksaraBinding.inflate(layoutInflater)
@@ -42,6 +45,14 @@ class AksaraActivity : AppCompatActivity() {
         getAksaraData("rarangken", rarangkenList, rarangkenAdapter)
         getAksaraData("angka", angkaList, angkaAdapter)
         getAksaraData("sasatoan", sasatoanList, sasatoanAdapter)
+
+        val backToMainBtn = findViewById<ImageView>(R.id.back_main_btn)
+
+        backToMainBtn.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun setupRecyclerViews() {
@@ -68,8 +79,6 @@ class AksaraActivity : AppCompatActivity() {
     }
 
     private fun getAksaraData(nodeName: String, list: ArrayList<AksaraModel>, adapter: AksaraAdapter) {
-        binding.progressBar.visibility = View.VISIBLE
-
         val database = FirebaseDatabase.getInstance("https://sundarua-id-default-rtdb.asia-southeast1.firebasedatabase.app/")
         val aksaraRef = database.reference.child(nodeName)
 
@@ -85,12 +94,20 @@ class AksaraActivity : AppCompatActivity() {
                     }
                     adapter.notifyDataSetChanged()
                 }
-                binding.progressBar.visibility = View.GONE
+                loadedDataCount++
+                if (loadedDataCount == totalDataNodes) {
+                    binding.progressBar.visibility = View.GONE
+                    binding.nestedScrollView.visibility = View.VISIBLE
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                binding.progressBar.visibility = View.GONE
                 Toast.makeText(this@AksaraActivity, "Failed to load data.", Toast.LENGTH_SHORT).show()
+                loadedDataCount++
+                if (loadedDataCount == totalDataNodes) {
+                    binding.progressBar.visibility = View.GONE
+                    binding.nestedScrollView.visibility = View.VISIBLE
+                }
             }
         })
     }
