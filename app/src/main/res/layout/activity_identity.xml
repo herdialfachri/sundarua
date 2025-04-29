@@ -1,102 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/bgidentity"
+    android:background="@drawable/redbottombg"
     tools:context=".activity.IdentityActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sundarua_app"
-        android:fontFamily="@font/poppins_bold"
-        android:textSize="34sp"
-        android:textColor="@color/main_red"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/avatarImg" />
-
-    <ImageView
-        android:id="@+id/avatarImg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintBottom_toTopOf="@+id/nickname"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
-        app:srcCompat="@drawable/avatarid"
-        tools:ignore="ContentDescription" />
-
+    <!-- Versi Aplikasi -->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:textSize="@dimen/text_caption"
         android:text="@string/versi_1_0"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Judul App -->
+    <TextView
+        android:id="@+id/appTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/sundarua_app"
+        android:textSize="@dimen/text_heading_xl"
+        android:textColor="@color/main_red"
+        app:layout_constraintTop_toBottomOf="@id/textView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/margin_24" />
+
+    <!-- Avatar Image -->
+    <ImageView
+        android:id="@+id/avatarImg"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginBottom="@dimen/margin_24"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toBottomOf="@id/appTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/nickname"
+        app:srcCompat="@drawable/animbg"
+        android:contentDescription="@string/avatar_description"
+        tools:ignore="ContentDescription" />
+
+    <!-- Nickname Label -->
     <TextView
         android:id="@+id/nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/poppins_bold"
+        android:layout_marginStart="@dimen/margin_16"
         android:text="@string/nami_panggilan"
+        android:layout_marginBottom="@dimen/margin_8"
         android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/nameEditText"
-        app:layout_constraintStart_toStartOf="@+id/nameEditText" />
+        android:textSize="@dimen/text_body_s"
+        app:layout_constraintBottom_toTopOf="@id/nameEditText"
+        app:layout_constraintStart_toStartOf="@id/nameEditText" />
 
-    <TextView
-        android:id="@+id/informationTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:text="@string/press_button"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/saveNameButton"
-        app:layout_constraintEnd_toEndOf="@+id/saveNameButton"
-        app:layout_constraintStart_toStartOf="@+id/saveNameButton" />
-
+    <!-- EditText untuk Nama -->
     <EditText
         android:id="@+id/nameEditText"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="80dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/edittext_height"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginBottom="@dimen/margin_40"
         android:background="@drawable/rounded_edittext"
         android:fontFamily="@font/poppins_bold"
         android:hint="@string/tulis_nama"
         android:inputType="textCapWords"
-        android:padding="20dp"
+        android:padding="@dimen/padding_edittext"
         android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/informationTv"
+        android:textSize="@dimen/text_body_m"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/informationTv" />
 
+    <!-- Information Text -->
+    <TextView
+        android:id="@+id/informationTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_8"
+        android:text="@string/press_button"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_body_s"
+        app:layout_constraintBottom_toTopOf="@id/saveNameButton"
+        app:layout_constraintStart_toStartOf="@id/saveNameButton"
+        app:layout_constraintEnd_toEndOf="@id/saveNameButton" />
+
+    <!-- Button Save -->
     <Button
         android:id="@+id/saveNameButton"
         style="@style/PoppinsButtonBoldStyle"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="50dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginStart="@dimen/margin_24"
+        android:layout_marginEnd="@dimen/margin_24"
+        android:layout_marginBottom="@dimen/margin_40"
         android:backgroundTint="@color/white"
         android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
