@@ -2,53 +2,43 @@ package com.example.sundarua.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.sundarua.activity.MainActivity
-import com.example.sundarua.R
+import com.example.sundarua.databinding.ActivityWordBinding
 import com.example.sundarua.adapter.WordAdapter
 import com.example.sundarua.data.Word
 import com.example.sundarua.service.ApiClient
 import kotlinx.coroutines.launch
 
 class WordActivity : AppCompatActivity() {
-    private lateinit var recyclerView: RecyclerView
+
+    private lateinit var binding: ActivityWordBinding
     private lateinit var adapter: WordAdapter
-    private lateinit var searchView: SearchView
-    private lateinit var progressBar: android.widget.ProgressBar
     private var listWord: List<Word> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_word)
+        binding = ActivityWordBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val backToMainBtn = findViewById<ImageView>(R.id.back_main_btn)
-
-        backToMainBtn.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+        // Tombol kembali ke MainActivity
+        binding.backMainBtn.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
 
-        recyclerView = findViewById(R.id.rvWords)
-        searchView = findViewById(R.id.searchView)
-        progressBar = findViewById(R.id.progressBar)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        // Setup RecyclerView
+        binding.rvWords.layoutManager = LinearLayoutManager(this)
         getData()
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
+        // Setup SearchView
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean = false
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 lifecycleScope.launch {
@@ -63,16 +53,16 @@ class WordActivity : AppCompatActivity() {
 
     private fun getData() {
         lifecycleScope.launch {
-            progressBar.visibility = android.view.View.VISIBLE
+            binding.progressBar.visibility = android.view.View.VISIBLE
             try {
                 val response = ApiClient.apiService.getWords()
                 listWord = response.words
                 adapter = WordAdapter(listWord)
-                recyclerView.adapter = adapter
+                binding.rvWords.adapter = adapter
             } catch (e: Exception) {
                 Toast.makeText(this@WordActivity, "Antosan sakedap nuju nampilkeun data", Toast.LENGTH_SHORT).show()
             } finally {
-                progressBar.visibility = android.view.View.GONE
+                binding.progressBar.visibility = android.view.View.GONE
             }
         }
     }
