@@ -15,6 +15,18 @@
 
     <style name="Theme.Sundarua" parent="Base.Theme.Sundarua" />
 
+    <!-- Base splash screen theme -->
+    <style name="Theme.MyApp.Splash" parent="Theme.SplashScreen">
+        <!-- Optional: Set your splash screen background color -->
+        <item name="windowSplashScreenBackground">@color/secondary_red</item>
+
+        <!-- Optional: Set your splash screen icon -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/animbg</item>
+
+        <!-- Optional: Set the duration the splash screen is shown -->
+        <item name="postSplashScreenTheme">@style/Theme.Sundarua</item>
+    </style>
+
     <!-- Default TextView Style -->
     <style name="PoppinsTextViewStyle" parent="android:Widget.TextView">
         <item name="android:fontFamily">@font/poppins_regular</item>

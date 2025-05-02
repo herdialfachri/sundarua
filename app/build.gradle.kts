@@ -46,6 +46,7 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.firebase.database)
     implementation(libs.picasso)
+    implementation(libs.androidx.core.splashscreen)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
