@@ -3,29 +3,27 @@ package com.example.sundarua.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sundarua.R
 import com.example.sundarua.adapter.QuizListAdapter
 import com.example.sundarua.databinding.ActivityQuizBinding
 import com.example.sundarua.model.QuizModel
 import com.google.firebase.database.FirebaseDatabase
 
 class QuizActivity : AppCompatActivity() {
-    lateinit var binding: ActivityQuizBinding
-    lateinit var quizModelList : MutableList<QuizModel>
-    lateinit var adapter: QuizListAdapter
+    private lateinit var binding: ActivityQuizBinding
+    private lateinit var quizModelList: MutableList<QuizModel>
+    private lateinit var adapter: QuizListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val backToMainBtn = findViewById<ImageView>(R.id.back_main_btn)
-
-        backToMainBtn.setOnClickListener {
+        // Gunakan viewBinding untuk tombol back
+        binding.backMainBtn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
             finish()
         }
@@ -44,7 +42,6 @@ class QuizActivity : AppCompatActivity() {
     private fun getDataFromFirebase() {
         binding.progressBar.visibility = View.VISIBLE
 
-        // Ganti URL Firebase dengan region yang sesuai
         val database = FirebaseDatabase.getInstance("https://sundarua-id-default-rtdb.asia-southeast1.firebasedatabase.app/")
         val reference = database.reference.child("quizzes")
 

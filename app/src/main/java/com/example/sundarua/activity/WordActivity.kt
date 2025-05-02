@@ -28,7 +28,9 @@ class WordActivity : AppCompatActivity() {
 
         // Tombol kembali ke MainActivity
         binding.backMainBtn.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            startActivity(intent)
             finish()
         }
 
