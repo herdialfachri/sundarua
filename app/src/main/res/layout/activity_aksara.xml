@@ -37,12 +37,12 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/blackMediumText"
+                android:textSize="@dimen/text_m"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Aksara Ngalagena"
-                android:layout_marginStart="8dp"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:text="@string/aksara_ngalagena"
+                android:layout_marginStart="8dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewNgalagena"
@@ -52,13 +52,13 @@
                 android:contentDescription="@string/aksara_sunda" />
 
             <TextView
+                style="@style/blackMediumText"
+                android:textSize="@dimen/text_m"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Aksara Swara"
-                android:layout_marginStart="8dp"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:text="@string/aksara_swara"
+                android:layout_marginStart="8dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewSwara"
@@ -68,13 +68,13 @@
                 android:contentDescription="@string/aksara_sunda" />
 
             <TextView
+                style="@style/blackMediumText"
+                android:textSize="@dimen/text_m"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Rarangken"
-                android:layout_marginStart="8dp"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:text="@string/rarangken"
+                android:layout_marginStart="8dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewRarangken"
@@ -83,13 +83,13 @@
                 android:layout_marginTop="8dp" />
 
             <TextView
+                style="@style/blackMediumText"
+                android:textSize="@dimen/text_m"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Angka"
-                android:layout_marginStart="8dp"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:text="@string/angka"
+                android:layout_marginStart="8dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewAngka"
@@ -98,13 +98,13 @@
                 android:layout_marginTop="8dp" />
 
             <TextView
+                style="@style/blackMediumText"
+                android:textSize="@dimen/text_m"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Sasatoan"
-                android:layout_marginStart="8dp"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:text="@string/sasatoan"
+                android:layout_marginStart="8dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewSasatoan"
@@ -135,14 +135,13 @@
             tools:ignore="ContentDescription" />
 
         <TextView
+            style="@style/whiteMediumText"
             android:id="@+id/aksaraText"
+            android:textSize="@dimen/text_sl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/kosakata"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:text="@string/kosakata" />
 
     </FrameLayout>
 

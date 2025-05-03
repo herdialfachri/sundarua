@@ -27,12 +27,12 @@
 
             <!-- Judul Word Header -->
             <TextView
+                style="@style/whiteMediumText"
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/word_header"
-                android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="@dimen/text_sl"
                 android:layout_gravity="center" />
         </FrameLayout>
 
@@ -40,7 +40,7 @@
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/rounded_button"
             app:iconifiedByDefault="false"

@@ -7,111 +7,6 @@
     android:background="@drawable/homebg"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/greeting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        tools:text="Sampurasun"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/influenceText"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/coinTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Coin"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/coinImg"
-        app:layout_constraintStart_toEndOf="@+id/coinImg"
-        app:layout_constraintTop_toTopOf="@+id/coinImg" />
-
-    <TextView
-        android:id="@+id/levelTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        tools:text="Level"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/greeting"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/greeting" />
-
-
-    <TextView
-        android:id="@+id/influenceText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="64dp"
-        android:text="@string/home_slug"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/influenceText2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coinTv" />
-
-    <TextView
-        android:id="@+id/influenceText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="@string/motivation"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/toAksaraBtn"
-        app:layout_constraintEnd_toEndOf="@+id/toAksaraBtn"
-        app:layout_constraintStart_toStartOf="@+id/toAksaraBtn" />
-
-    <Button
-        android:id="@+id/toAksaraBtn"
-        style="@style/PoppinsButtonBoldStyle"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/white"
-        android:text="@string/aksara_sunda"
-        app:layout_constraintBottom_toTopOf="@+id/toQuizBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/toQuizBtn"
-        style="@style/PoppinsButtonBoldStyle"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/white"
-        android:text="@string/latihan_kuis"
-        app:layout_constraintBottom_toTopOf="@+id/toWordBtn"
-        app:layout_constraintEnd_toEndOf="@+id/toWordBtn"
-        app:layout_constraintStart_toStartOf="@+id/toWordBtn" />
-
-    <Button
-        android:id="@+id/toWordBtn"
-        style="@style/PoppinsButtonBoldStyle"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="44dp"
-        android:backgroundTint="@color/white"
-        android:text="@string/belajar_kata"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ImageView
         android:id="@+id/levelImg"
         android:layout_width="wrap_content"
@@ -127,8 +22,108 @@
         android:id="@+id/coinImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/greeting"
         app:layout_constraintTop_toBottomOf="@+id/greeting"
         app:srcCompat="@drawable/baseline_attach_money_24" />
+
+    <TextView
+        style="@style/whiteMediumText"
+        android:id="@+id/greeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        tools:text="Sampurasun"
+        android:textSize="@dimen/text_m"
+        app:layout_constraintStart_toStartOf="@+id/influenceText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        style="@style/whiteRegularText"
+        android:id="@+id/coinTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Coin"
+        android:textSize="@dimen/text_m"
+        app:layout_constraintBottom_toBottomOf="@+id/coinImg"
+        app:layout_constraintStart_toEndOf="@+id/coinImg"
+        app:layout_constraintTop_toTopOf="@+id/coinImg" />
+
+    <TextView
+        style="@style/whiteRegularText"
+        android:id="@+id/levelTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        tools:text="Level"
+        android:textSize="@dimen/text_m"
+        app:layout_constraintBottom_toBottomOf="@+id/greeting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/greeting" />
+
+
+    <TextView
+        style="@style/whiteMediumText"
+        android:textSize="@dimen/text_xl"
+        android:id="@+id/influenceText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="64dp"
+        android:text="@string/home_slug"
+        app:layout_constraintBottom_toTopOf="@+id/influenceText2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coinTv" />
+
+    <TextView
+        style="@style/whiteRegularText"
+        android:id="@+id/influenceText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/motivation"
+        android:textSize="@dimen/text_sm"
+        app:layout_constraintBottom_toTopOf="@+id/toAksaraBtn"
+        app:layout_constraintEnd_toEndOf="@+id/toAksaraBtn"
+        app:layout_constraintStart_toStartOf="@+id/toAksaraBtn" />
+
+    <Button
+        style="@style/whiteButton"
+        android:id="@+id/toAksaraBtn"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/aksara_sunda"
+        app:layout_constraintBottom_toTopOf="@+id/toQuizBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        style="@style/whiteButton"
+        android:id="@+id/toQuizBtn"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/latihan_kuis"
+        app:layout_constraintBottom_toTopOf="@+id/toWordBtn"
+        app:layout_constraintEnd_toEndOf="@+id/toWordBtn"
+        app:layout_constraintStart_toStartOf="@+id/toWordBtn" />
+
+    <Button
+        style="@style/whiteButton"
+        android:id="@+id/toWordBtn"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="44dp"
+        android:text="@string/belajar_kata"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

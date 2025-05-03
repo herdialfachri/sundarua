@@ -25,12 +25,12 @@
             tools:ignore="ContentDescription" />
 
         <TextView
+            style="@style/blackRegularText"
             android:id="@+id/descriptionTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Description"
-            android:textSize="14sp"
+            android:text="@string/description"
+            android:textSize="@dimen/text_sm"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView"

@@ -20,7 +20,10 @@ class QuizActivity : AppCompatActivity() {
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Gunakan viewBinding untuk tombol back
+        // Tampilkan coin dari SharedPreferences
+        updateCoinView()
+
+        // Tombol kembali ke MainActivity
         binding.backMainBtn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
@@ -30,6 +33,17 @@ class QuizActivity : AppCompatActivity() {
 
         quizModelList = mutableListOf()
         getDataFromFirebase()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateCoinView() // Refresh coin saat kembali ke activity ini
+    }
+
+    private fun updateCoinView() {
+        val gamePref = getSharedPreferences("game_data", MODE_PRIVATE)
+        val coin = gamePref.getInt("coin", 0)
+        binding.quizzCoin.text = "Koin: $coin"
     }
 
     private fun setupRecyclerView() {

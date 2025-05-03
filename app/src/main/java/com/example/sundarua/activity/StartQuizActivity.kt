@@ -144,7 +144,7 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
             scoreSubtitle.text = "$score ti $totalQuestions jawaban anu bener"
 
             finishBtn.setOnClickListener {
-                val intent = Intent(this@StartQuizActivity, MainActivity::class.java)
+                val intent = Intent(this@StartQuizActivity, QuizActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent)
                 finish()

@@ -11,22 +11,14 @@
     <dimen name="margin_60">60dp</dimen>
     <dimen name="margin_68">68dp</dimen>
 
-    <!-- Headings -->
-    <dimen name="text_heading_xl">32sp</dimen>
-    <dimen name="text_heading_l">26sp</dimen>
-    <dimen name="text_heading_m">20sp</dimen>
-
-    <!-- Body text -->
-    <dimen name="text_body_l">18sp</dimen>
-    <dimen name="text_body_m">16sp</dimen>
-    <dimen name="text_body_s">14sp</dimen>
-
-    <!-- Caption / Small text -->
-    <dimen name="text_caption">12sp</dimen>
-    <dimen name="text_small">10sp</dimen>
-
-    <!-- Button text -->
-    <dimen name="text_button">16sp</dimen>
+    <!-- Text size -->
+    <dimen name="text_xxl">40sp</dimen>
+    <dimen name="text_xl">32sp</dimen>
+    <dimen name="text_l">24sp</dimen>
+    <dimen name="text_sl">20sp</dimen>
+    <dimen name="text_m">16sp</dimen>
+    <dimen name="text_sm">14sp</dimen>
+    <dimen name="text_s">8sp</dimen>
 
     <!-- padding edittext/button/etc -->
     <dimen name="padding_edittext">20dp</dimen>

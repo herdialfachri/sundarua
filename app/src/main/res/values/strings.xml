@@ -2,7 +2,7 @@
     <string name="app_name">Sundarua</string>
     <string name="latihan_kuis">Latihan Kuis</string>
     <string name="belajar_kata">Diajar Kecap</string>
-    <string name="home_slug">Diajar Matak Rame jeung Sundarua!</string>
+    <string name="home_slug">Sundarua, Ti Sakola Pikeun Keur Urang Sunda!</string>
     <string name="motivation">Diajar unggal poe, jadi budak nu pinuh élmu!</string>
     <string name="aksara_sunda">Aksara Sunda</string>
     <string name="word_header">Diajar Kecap</string>
@@ -31,4 +31,11 @@
     <string name="bereskeun_pananyaan_dihandap_ieu">Bereskeun pananyaan dihandap ieu</string>
     <string name="kosakata">Kosakata</string>
     <string name="avatar_description">Avatar Description</string>
+    <string name="sasatoan">Sasatoan</string>
+    <string name="angka">Angka</string>
+    <string name="rarangken">Rarangken</string>
+    <string name="aksara_swara">Aksara Swara</string>
+    <string name="aksara_ngalagena">Aksara Ngalagena</string>
+    <string name="description">Description</string>
+    <string name="koin">Koin</string>
 </resources>

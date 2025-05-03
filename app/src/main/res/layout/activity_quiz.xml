@@ -23,35 +23,42 @@
             tools:ignore="ContentDescription" />
 
         <TextView
+            style="@style/whiteMediumText"
             android:id="@+id/quizText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/kuis"
-            android:letterSpacing="0.1"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_sl"
             android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/quizzCoin"
+            style="@style/whiteRegularText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/koin"
+            android:textSize="@dimen/text_sm" />
     </FrameLayout>
 
     <!-- Teks Soal -->
     <TextView
+        style="@style/blackMediumText"
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/soal"
         android:layout_marginStart="12dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginTop="80dp" />
+        android:textSize="@dimen/text_m"
+        android:layout_marginTop="70dp" />
 
     <TextView
+        style="@style/blackRegularText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:textSize="14sp"
+        android:textSize="@dimen/text_sm"
         android:textStyle="italic"
-        android:textColor="@color/dark_gray"
         android:text="@string/bereskeun_pananyaan_dihandap_ieu" />
 
     <!-- Kontainer untuk RecyclerView dan ProgressBar -->
