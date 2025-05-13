@@ -8,9 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sundarua.databinding.ActivityWordBinding
 import com.example.sundarua.adapter.WordAdapter
 import com.example.sundarua.data.Word
+import com.example.sundarua.databinding.ActivityWordBinding
 import com.example.sundarua.service.ApiClient
 import kotlinx.coroutines.launch
 
@@ -45,7 +45,9 @@ class WordActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 lifecycleScope.launch {
                     newText?.let {
-                        adapter.filterList(it)
+                        if (::adapter.isInitialized && listWord.isNotEmpty()) {
+                            adapter.filterList(it)
+                        }
                     }
                 }
                 return true
