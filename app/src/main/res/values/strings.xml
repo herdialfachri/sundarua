@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Sundarua</string>
     <string name="latihan_kuis">Latihan Kuis</string>
-    <string name="belajar_kata">Diajar Kecap</string>
+    <string name="belajar_kata">Undak Usuk Basa Sunda</string>
     <string name="home_slug">Sundarua, Ti Sakola Pikeun Keur Urang Sunda!</string>
     <string name="motivation">Diajar unggal poe, jadi budak nu pinuh élmu!</string>
-    <string name="aksara_sunda">Aksara Sunda</string>
+    <string name="aksara_sunda">Kamus Sunda</string>
     <string name="word_header">Diajar Kecap</string>
     <string name="kuis">Kuis</string>
     <string name="soal">Pananyaan</string>
