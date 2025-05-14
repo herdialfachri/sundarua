@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sundarua.databinding.ActivityIdentityBinding
+import com.example.sundarua.helper.NameValidator
 
 class IdentityActivity : AppCompatActivity() {
 
@@ -20,7 +21,7 @@ class IdentityActivity : AppCompatActivity() {
         binding.saveNameButton.setOnClickListener {
             val name = binding.nameEditText.text.toString().trim()
 
-            if (name.isNotEmpty()) {
+            if (NameValidator.isValid(name)) {
                 // Tampilkan Toast
                 Toast.makeText(this, "Wilujeung sumping $name", Toast.LENGTH_LONG).show()
 
