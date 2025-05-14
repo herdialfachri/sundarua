@@ -8,9 +8,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sundarua.databinding.ActivityRewardBinding
+import com.example.sundarua.helper.RewardHelper
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+
+private val helper = RewardHelper()
 
 class RewardActivity : AppCompatActivity() {
 
@@ -62,11 +65,11 @@ class RewardActivity : AppCompatActivity() {
             val newCoin = coin - price
             sharedPref.edit().putInt("coin", newCoin).apply()
 
-            val code = generateUniqueCode()
+            val code = helper.generateClaimCode()
 
             val rewardPref = getSharedPreferences("reward_data", Context.MODE_PRIVATE)
             val previousHistory = rewardPref.getStringSet("claim_history", setOf())?.toMutableSet() ?: mutableSetOf()
-            previousHistory.add("$itemName - Kode: $code")
+            previousHistory.add(helper.formatClaimHistory(itemName, code))
             rewardPref.edit().putStringSet("claim_history", previousHistory).apply()
 
             Toast.makeText(this, "Hadiah $itemName atos dicandak!\nKode: $code", Toast.LENGTH_SHORT).show()
@@ -75,11 +78,6 @@ class RewardActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Koin kanggo nukerkeun $itemName te cukup!", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun generateUniqueCode(): String {
-        val timestamp = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(Date())
-        return "CLM$timestamp"
     }
 
     private fun showClaimHistory() {
