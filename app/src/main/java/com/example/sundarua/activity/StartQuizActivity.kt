@@ -14,6 +14,7 @@ import com.example.sundarua.R
 import com.example.sundarua.databinding.ActivityStartQuizBinding
 import com.example.sundarua.databinding.ScoreDialogBinding
 import com.example.sundarua.model.QuestionModel
+import com.example.sundarua.test.QuizUtils
 
 class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -120,7 +121,7 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
         mediaPlayer = null
 
         val totalQuestions = questionModelList.size
-        val percentage = ((score.toFloat() / totalQuestions.toFloat()) * 100).toInt()
+        val percentage = QuizUtils.calculateScorePercentage(score, questionModelList.size)
 
         val dialogBinding = ScoreDialogBinding.inflate(layoutInflater)
         dialogBinding.apply {
@@ -133,8 +134,7 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
 
                 val currentCoin = getCoin()
                 val currentLevel = getLevel()
-                val newCoin = currentCoin + 100
-                val newLevel = currentLevel + 1
+                val (newCoin, newLevel) = QuizUtils.updateCoinAndLevel(currentCoin, currentLevel, true)
                 saveCoinAndLevel(newCoin, newLevel)
             } else {
                 scoreTitle.text = "Hayu diajar deui sing rajin"
@@ -164,7 +164,7 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun getLevel(): Int {
         val sharedPref = getSharedPreferences("game_data", MODE_PRIVATE)
-        return sharedPref.getInt("level", 1)
+        return sharedPref.getInt("level", 0)
     }
 
     private fun saveCoinAndLevel(coin: Int, level: Int) {

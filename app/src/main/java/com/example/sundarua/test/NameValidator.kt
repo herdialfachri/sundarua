@@ -1,4 +1,4 @@
-package com.example.sundarua.helper
+package com.example.sundarua.test
 
 object NameValidator {
     fun isValid(name: String): Boolean {

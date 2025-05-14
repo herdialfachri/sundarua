@@ -1,4 +1,4 @@
-package com.example.sundarua.helper
+package com.example.sundarua.test
 
 object GameDataManager {
     fun getGreeting(name: String): String {
