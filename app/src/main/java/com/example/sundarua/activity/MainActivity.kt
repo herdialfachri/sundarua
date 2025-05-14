@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.sundarua.databinding.ActivityMainBinding
+import com.example.sundarua.helper.GameDataManager
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             finish()
         } else {
             // Set nama pengguna
-            binding.greeting.text = "Sampurasun, $name!"
+            binding.greeting.text = GameDataManager.getGreeting(name)
 
             // Set coin dan level
             updateCoinAndLevel()
@@ -59,8 +60,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateCoinAndLevel() {
         val gamePref = getSharedPreferences("game_data", Context.MODE_PRIVATE)
-        val coin = gamePref.getInt("coin", 0)
-        val level = gamePref.getInt("level", 1)
+
+        val (coin, level) = GameDataManager.getCoinAndLevel(
+            mapOf(
+                "coin" to gamePref.getInt("coin", 0),
+                "level" to gamePref.getInt("level", 0)
+            )
+        )
 
         binding.coinTv.text = "Coin: $coin"
         binding.levelTv.text = "Level: $level"
