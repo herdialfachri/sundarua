@@ -1,6 +1,6 @@
 package com.example.sundarua
 
-import com.example.sundarua.helper.NameValidator
+import com.example.sundarua.test.NameValidator
 import org.junit.Assert.*
 import org.junit.Test
 

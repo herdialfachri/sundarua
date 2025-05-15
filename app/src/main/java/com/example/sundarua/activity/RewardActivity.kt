@@ -8,10 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sundarua.databinding.ActivityRewardBinding
-import com.example.sundarua.helper.RewardHelper
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import com.example.sundarua.test.RewardHelper
 
 private val helper = RewardHelper()
 

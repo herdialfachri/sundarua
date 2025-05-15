@@ -1,6 +1,6 @@
 package com.example.sundarua
 
-import com.example.sundarua.helper.RewardHelper
+import com.example.sundarua.test.RewardHelper
 import org.junit.Assert.*
 import org.junit.Test
 

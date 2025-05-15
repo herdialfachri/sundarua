@@ -1,6 +1,6 @@
 package com.example.sundarua
 
-import com.example.sundarua.helper.GameDataManager
+import com.example.sundarua.test.GameDataManager
 import org.junit.Assert.*
 import org.junit.Test
 

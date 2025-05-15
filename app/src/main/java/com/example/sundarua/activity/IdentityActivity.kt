@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sundarua.databinding.ActivityIdentityBinding
-import com.example.sundarua.helper.NameValidator
+import com.example.sundarua.test.NameValidator
 
 class IdentityActivity : AppCompatActivity() {
 
