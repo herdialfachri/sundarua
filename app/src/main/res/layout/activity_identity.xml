@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="@drawable/redbottombg"
     tools:context=".activity.IdentityActivity">
 
@@ -51,13 +52,13 @@
 
     <!-- Nickname Label -->
     <TextView
-        style="@style/whiteMediumText"
         android:id="@+id/nickname"
+        style="@style/whiteMediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_16"
-        android:text="@string/nami_panggilan"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="@dimen/margin_8"
+        android:text="@string/nami_panggilan"
         android:textSize="@dimen/text_sm"
         app:layout_constraintBottom_toTopOf="@id/nameEditText"
         app:layout_constraintStart_toStartOf="@id/nameEditText" />
@@ -84,10 +85,10 @@
         android:id="@+id/saveNameButton"
         style="@style/whiteButton"
         android:layout_width="0dp"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginStart="@dimen/margin_24"
-        android:layout_marginEnd="@dimen/margin_24"
-        android:layout_marginBottom="@dimen/margin_40"
+        android:layout_height="60dp"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginBottom="48dp"
         android:text="@string/next"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

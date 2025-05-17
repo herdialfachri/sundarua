@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@drawable/small_top_bg">
+    android:layout_height="match_parent">
 
     <!-- Loading -->
     <ProgressBar
@@ -24,7 +24,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone"
-        android:layout_marginTop="70dp"
+        android:padding="16dp"
         android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/frameBackBtn"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,8 +41,7 @@
                 android:textSize="@dimen/text_m"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/aksara_ngalagena"
-                android:layout_marginStart="8dp" />
+                android:text="@string/aksara_ngalagena" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewNgalagena"
@@ -56,9 +55,8 @@
                 android:textSize="@dimen/text_m"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/aksara_swara"
-                android:layout_marginStart="8dp" />
+                android:layout_marginTop="16dp"
+                android:text="@string/aksara_swara" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewSwara"
@@ -72,9 +70,8 @@
                 android:textSize="@dimen/text_m"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/rarangken"
-                android:layout_marginStart="8dp" />
+                android:layout_marginTop="16dp"
+                android:text="@string/rarangken" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewRarangken"
@@ -87,9 +84,8 @@
                 android:textSize="@dimen/text_m"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/angka"
-                android:layout_marginStart="8dp" />
+                android:layout_marginTop="16dp"
+                android:text="@string/angka" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewAngka"
@@ -102,9 +98,8 @@
                 android:textSize="@dimen/text_m"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/sasatoan"
-                android:layout_marginStart="8dp" />
+                android:layout_marginTop="16dp"
+                android:text="@string/sasatoan" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewSasatoan"
@@ -121,8 +116,9 @@
         android:id="@+id/frameBackBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:background="@color/main_red"
         android:gravity="center_vertical"
+        android:padding="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">

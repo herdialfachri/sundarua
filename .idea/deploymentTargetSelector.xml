@@ -14,10 +14,10 @@
       <SelectionState runConfigName="WordActivityTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="MainActivityTest">
+      <SelectionState runConfigName="StartQuizActivityTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="IdentityActivityTest">
+      <SelectionState runConfigName="RewardActivityTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

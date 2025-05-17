@@ -5,7 +5,7 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
 
         <!-- Set status bar color to transparent -->
-        <item name="android:statusBarColor">@color/secondary_red</item>
+        <item name="android:statusBarColor">@color/main_red</item>
 
         <!-- Set Poppins as default font for all TextViews -->
         <item name="android:textViewStyle">@style/PoppinsTextViewStyle</item>

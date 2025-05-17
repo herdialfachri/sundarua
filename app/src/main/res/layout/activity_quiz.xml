@@ -4,16 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/small_top_bg"
-    android:padding="16dp"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
     tools:context=".activity.QuizActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="24dp">
+        android:padding="16dp"
+        android:background="@color/main_red"
+        android:gravity="center_vertical" >
 
         <ImageView
             android:id="@+id/back_main_btn"
@@ -48,15 +49,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/soal"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="16dp"
         android:textSize="@dimen/text_m"
-        android:layout_marginTop="70dp" />
+        android:layout_marginTop="16dp" />
 
     <TextView
         style="@style/blackRegularText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="16dp"
         android:textSize="@dimen/text_sm"
         android:textStyle="italic"
         android:text="@string/bereskeun_pananyaan_dihandap_ieu" />
@@ -67,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="16dp">
+        android:padding="16dp" >
 
         <ProgressBar
             android:id="@+id/progress_bar"

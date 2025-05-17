@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/main"
+    android:fitsSystemWindows="true"
     android:background="@drawable/homebg"
     android:layout_height="match_parent">
 
@@ -27,38 +28,39 @@
         app:srcCompat="@drawable/baseline_attach_money_24" />
 
     <TextView
-        style="@style/whiteMediumText"
         android:id="@+id/greeting"
+        style="@style/whiteMediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        tools:text="Sampurasun"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:textSize="@dimen/text_m"
-        app:layout_constraintStart_toStartOf="@+id/influenceText"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Sampurasun" />
 
     <TextView
         style="@style/whiteRegularText"
         android:id="@+id/coinTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Coin"
+        tools:text="Koin"
         android:textSize="@dimen/text_m"
         app:layout_constraintBottom_toBottomOf="@+id/coinImg"
         app:layout_constraintStart_toEndOf="@+id/coinImg"
         app:layout_constraintTop_toTopOf="@+id/coinImg" />
 
     <TextView
-        style="@style/whiteRegularText"
         android:id="@+id/levelTv"
+        style="@style/whiteRegularText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
-        tools:text="Level"
         android:textSize="@dimen/text_m"
         app:layout_constraintBottom_toBottomOf="@+id/greeting"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/greeting" />
+        app:layout_constraintTop_toTopOf="@+id/greeting"
+        tools:text="Level" />
 
 
     <TextView
@@ -91,7 +93,7 @@
         style="@style/whiteButton"
         android:id="@+id/toAksaraBtn"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="75dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
@@ -104,7 +106,7 @@
         style="@style/whiteButton"
         android:id="@+id/toQuizBtn"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="75dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
@@ -117,10 +119,10 @@
         style="@style/whiteButton"
         android:id="@+id/toWordBtn"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="75dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/belajar_kata"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

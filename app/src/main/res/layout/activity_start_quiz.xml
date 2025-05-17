@@ -5,18 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
     tools:context=".activity.StartQuizActivity">
 
     <RelativeLayout
-        android:layout_marginTop="24dp"
+        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             style="@style/blackMediumText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Question 7/20"
+            tools:text="Soal 7/20"
             android:textSize="@dimen/text_m"
             android:layout_centerVertical="true"
             android:id="@+id/question_indicator_textview"/>
@@ -40,13 +41,12 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:id="@+id/timer_indicator_textview"/>
-
-
     </RelativeLayout>
+
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="8dp"
+        android:padding="16dp"
         app:indicatorColor="@color/main_red"
         tools:progress="40"
         android:id="@+id/question_progress_indicator"/>
@@ -54,14 +54,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginVertical="8dp"
         android:elevation="4dp">
+
         <LinearLayout
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="12dp">
+            android:padding="16dp">
 
             <TextView
                 style="@style/whiteMediumText"

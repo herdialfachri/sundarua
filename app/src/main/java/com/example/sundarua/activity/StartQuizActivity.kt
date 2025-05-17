@@ -110,7 +110,7 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
             loadQuestions()
         } else {
             selectedAnswer = clickedBtn.text.toString()
-            clickedBtn.setBackgroundColor(getColor(R.color.orange))
+            clickedBtn.setBackgroundColor(getColor(R.color.green))
         }
     }
 

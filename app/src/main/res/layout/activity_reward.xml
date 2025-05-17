@@ -4,16 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/small_top_bg"
-    android:padding="16dp"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
     tools:context=".activity.RewardActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/main_red"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginTop="24dp">
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/back_main_btn"
@@ -39,8 +40,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tukerkeun_hadiah"
-        android:textSize="@dimen/text_m"
-        android:layout_marginTop="70dp" />
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:textSize="@dimen/text_m" />
 
     <TextView
         style="@style/blackRegularText"
@@ -48,38 +50,45 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_sm"
         android:textStyle="italic"
+        android:layout_marginStart="16dp"
         android:text="@string/alert_hadiah" />
 
     <Button
         android:id="@+id/getBookBtn"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         style="@style/redButton"
         android:text="@string/buku_200_coin" />
 
-        <Button
-            android:id="@+id/getPencilBtn"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="8dp"
-            style="@style/redButton"
-            android:text="@string/pensil_100_coin" />
+    <Button
+        android:id="@+id/getPencilBtn"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        style="@style/redButton"
+        android:text="@string/pensil_100_coin" />
 
-        <TextView
-            style="@style/blackMediumText"
-            android:id="@+id/claimTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/riwayat_abdi"
-            android:textSize="@dimen/text_m"
-            android:layout_marginTop="38dp" />
+    <TextView
+        style="@style/blackMediumText"
+        android:id="@+id/claimTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/riwayat_abdi"
+        android:textSize="@dimen/text_m"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"/>
 
-        <LinearLayout
-            style="@style/blackRegularText"
-            android:id="@+id/claimHistoryLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
+    <LinearLayout
+        style="@style/blackRegularText"
+        android:id="@+id/claimHistoryLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical" />
 
 </LinearLayout>
