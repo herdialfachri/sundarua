@@ -1,8 +1,6 @@
 package com.example.sundarua.activity
 
 import android.content.Intent
-import android.graphics.Color
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
@@ -14,7 +12,13 @@ import com.example.sundarua.R
 import com.example.sundarua.databinding.ActivityStartQuizBinding
 import com.example.sundarua.databinding.ScoreDialogBinding
 import com.example.sundarua.model.QuestionModel
-import com.example.sundarua.test.QuizUtils
+import com.example.sundarua.test.StartQuizHelper.calculateScorePercentage
+import com.example.sundarua.test.StartQuizHelper.getCoin
+import com.example.sundarua.test.StartQuizHelper.getLevel
+import com.example.sundarua.test.StartQuizHelper.saveCoinAndLevel
+import com.example.sundarua.test.StartQuizHelper.startBackgroundMusic
+import com.example.sundarua.test.StartQuizHelper.stopBackgroundMusic
+import com.example.sundarua.test.StartQuizHelper.updateCoinAndLevel
 
 class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -28,13 +32,18 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
     private var selectedAnswer = ""
     private var score = 0
 
-    private var mediaPlayer: MediaPlayer? = null // ⬅️ Tambahkan MediaPlayer
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStartQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupListeners()
+        startBackgroundMusic(this, R.raw.manukdadali)
+        loadQuestions()
+        startTimer()
+    }
+
+    private fun setupListeners() {
         binding.apply {
             btn0.setOnClickListener(this@StartQuizActivity)
             btn1.setOnClickListener(this@StartQuizActivity)
@@ -42,24 +51,15 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
             btn3.setOnClickListener(this@StartQuizActivity)
             nextBtn.setOnClickListener(this@StartQuizActivity)
         }
-
-        // ⬇️ Mulai putar musik saat kuis mulai
-        mediaPlayer = MediaPlayer.create(this, R.raw.manukdadali)
-        mediaPlayer?.isLooping = true
-        mediaPlayer?.start()
-
-        loadQuestions()
-        startTimer()
     }
 
     private fun startTimer() {
         val totalTimeInMillis = time.toInt() * 60 * 1000L
         object : CountDownTimer(totalTimeInMillis, 1000L) {
             override fun onTick(millisUntilFinished: Long) {
-                val seconds = millisUntilFinished / 1000
-                val minutes = seconds / 60
-                val remainingSeconds = seconds % 60
-                binding.timerIndicatorTextview.text = String.format("%02d:%02d", minutes, remainingSeconds)
+                val minutes = (millisUntilFinished / 1000) / 60
+                val seconds = (millisUntilFinished / 1000) % 60
+                binding.timerIndicatorTextview.text = String.format("%02d:%02d", minutes, seconds)
             }
 
             override fun onFinish() {
@@ -70,35 +70,29 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun loadQuestions() {
         selectedAnswer = ""
+
         if (currentQuestionIndex == questionModelList.size) {
             finishQuiz()
             return
         }
 
+        val question = questionModelList[currentQuestionIndex]
         binding.apply {
             questionIndicatorTextview.text = "Question ${currentQuestionIndex + 1}/${questionModelList.size}"
             questionProgressIndicator.progress =
-                (currentQuestionIndex.toFloat() / questionModelList.size.toFloat() * 100).toInt()
-            questionTextview.text = questionModelList[currentQuestionIndex].question
-            btn0.text = questionModelList[currentQuestionIndex].options[0]
-            btn1.text = questionModelList[currentQuestionIndex].options[1]
-            btn2.text = questionModelList[currentQuestionIndex].options[2]
-            btn3.text = questionModelList[currentQuestionIndex].options[3]
+                ((currentQuestionIndex.toFloat() / questionModelList.size) * 100).toInt()
+            questionTextview.text = question.question
+            btn0.text = question.options[0]
+            btn1.text = question.options[1]
+            btn2.text = question.options[2]
+            btn3.text = question.options[3]
         }
     }
 
     override fun onClick(view: View?) {
-        binding.apply {
-            btn0.setBackgroundColor(getColor(R.color.gray))
-            btn1.setBackgroundColor(getColor(R.color.gray))
-            btn2.setBackgroundColor(getColor(R.color.gray))
-            btn3.setBackgroundColor(getColor(R.color.gray))
-        }
-
-        val clickedBtn = view as Button
-        if (clickedBtn.id == R.id.next_btn) {
+        if (view?.id == R.id.next_btn) {
             if (selectedAnswer.isEmpty()) {
-                Toast.makeText(applicationContext, "Pilih heula soalna!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Pilih heula soalna!", Toast.LENGTH_SHORT).show()
                 return
             }
 
@@ -107,41 +101,44 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             currentQuestionIndex++
+            resetOptionColors()
             loadQuestions()
-        } else {
-            selectedAnswer = clickedBtn.text.toString()
-            clickedBtn.setBackgroundColor(getColor(R.color.green))
+        } else if (view is Button) {
+            resetOptionColors()
+            selectedAnswer = view.text.toString()
+            view.setBackgroundColor(getColor(R.color.green))
+        }
+    }
+
+    private fun resetOptionColors() {
+        binding.apply {
+            val defaultColor = getColor(R.color.gray)
+            btn0.setBackgroundColor(defaultColor)
+            btn1.setBackgroundColor(defaultColor)
+            btn2.setBackgroundColor(defaultColor)
+            btn3.setBackgroundColor(defaultColor)
         }
     }
 
     private fun finishQuiz() {
-        // ⬇️ Berhentikan musik saat kuis selesai
-        mediaPlayer?.stop()
-        mediaPlayer?.release()
-        mediaPlayer = null
+        stopBackgroundMusic()
 
-        val totalQuestions = questionModelList.size
-        val percentage = QuizUtils.calculateScorePercentage(score, questionModelList.size)
-
+        val percentage = calculateScorePercentage(score, questionModelList.size)
         val dialogBinding = ScoreDialogBinding.inflate(layoutInflater)
+
         dialogBinding.apply {
             scoreProgressIndicator.progress = percentage
             scoreProgressText.text = "$percentage%"
 
             if (percentage >= 60) {
                 scoreTitle.text = "Ngiring bingah! hade pisan"
-                scoreTitle.setTextColor(Color.BLACK)
-
-                val currentCoin = getCoin()
-                val currentLevel = getLevel()
-                val (newCoin, newLevel) = QuizUtils.updateCoinAndLevel(currentCoin, currentLevel, true)
-                saveCoinAndLevel(newCoin, newLevel)
+                val (newCoin, newLevel) = updateCoinAndLevel(getCoin(this@StartQuizActivity), getLevel(this@StartQuizActivity), true)
+                saveCoinAndLevel(this@StartQuizActivity, newCoin, newLevel)
             } else {
                 scoreTitle.text = "Hayu diajar deui sing rajin"
-                scoreTitle.setTextColor(Color.BLACK)
             }
 
-            scoreSubtitle.text = "$score ti $totalQuestions jawaban anu bener"
+            scoreSubtitle.text = "$score ti ${questionModelList.size} jawaban anu bener"
 
             finishBtn.setOnClickListener {
                 val intent = Intent(this@StartQuizActivity, QuizActivity::class.java)
@@ -157,29 +154,8 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
             .show()
     }
 
-    private fun getCoin(): Int {
-        val sharedPref = getSharedPreferences("game_data", MODE_PRIVATE)
-        return sharedPref.getInt("coin", 0)
-    }
-
-    private fun getLevel(): Int {
-        val sharedPref = getSharedPreferences("game_data", MODE_PRIVATE)
-        return sharedPref.getInt("level", 0)
-    }
-
-    private fun saveCoinAndLevel(coin: Int, level: Int) {
-        val sharedPref = getSharedPreferences("game_data", MODE_PRIVATE)
-        sharedPref.edit()
-            .putInt("coin", coin)
-            .putInt("level", level)
-            .apply()
-    }
-
     override fun onDestroy() {
         super.onDestroy()
-        // ⬇️ Pastikan musik berhenti kalau user keluar dari activity
-        mediaPlayer?.stop()
-        mediaPlayer?.release()
-        mediaPlayer = null
+        stopBackgroundMusic()
     }
 }

@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.sundarua.databinding.ActivityMainBinding
-import com.example.sundarua.test.GameDataManager
+import com.example.sundarua.test.UserPrefManager
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,58 +17,65 @@ class MainActivity : AppCompatActivity() {
 
         installSplashScreen()
 
+        // Cek user
+        if (!UserPrefManager.isUserNameAvailable(this)) {
+            redirectToIdentity()
+            return
+        }
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Cek apakah user sudah mengisi identity
-        val sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        val name = sharedPref.getString("user_name", null)
-
-        if (name == null) {
-            startActivity(Intent(this, IdentityActivity::class.java))
-            finish()
-        } else {
-            // Set nama pengguna
-            binding.greeting.text = GameDataManager.getGreeting(name)
-
-            // Set coin dan level
-            updateCoinAndLevel()
-
-            // Tombol navigasi
-            binding.toWordBtn.setOnClickListener {
-                startActivity(Intent(this, WordActivity::class.java))
-            }
-
-            binding.toQuizBtn.setOnClickListener {
-                startActivity(Intent(this, QuizActivity::class.java))
-            }
-
-            binding.toAksaraBtn.setOnClickListener {
-                startActivity(Intent(this, AksaraActivity::class.java))
-            }
-
-            binding.coinTv.setOnClickListener {
-                startActivity(Intent(this, RewardActivity::class.java))
-            }
-        }
+        setupGreeting()
+        setupNavigation()
+        updateCoinAndLevel()
     }
 
     override fun onResume() {
         super.onResume()
-        updateCoinAndLevel() // Refresh coin dan level setiap kembali ke MainActivity
+        updateCoinAndLevel()
+    }
+
+    private fun setupGreeting() {
+        val name = UserPrefManager.getUserName(this) ?: return
+        binding.greeting.text = UserPrefManager.getGreeting(name)
+    }
+
+    private fun setupNavigation() {
+        binding.toWordBtn.setOnClickListener {
+            startActivity(Intent(this, WordActivity::class.java))
+        }
+
+        binding.toQuizBtn.setOnClickListener {
+            startActivity(Intent(this, QuizActivity::class.java))
+        }
+
+        binding.toAksaraBtn.setOnClickListener {
+            startActivity(Intent(this, AksaraActivity::class.java))
+        }
+
+        binding.coinTv.setOnClickListener {
+            startActivity(Intent(this, RewardActivity::class.java))
+        }
     }
 
     private fun updateCoinAndLevel() {
         val gamePref = getSharedPreferences("game_data", Context.MODE_PRIVATE)
 
-        val (coin, level) = GameDataManager.getCoinAndLevel(
-            mapOf(
-                "coin" to gamePref.getInt("coin", 0),
-                "level" to gamePref.getInt("level", 0)
-            )
-        )
+        val coin = gamePref.getInt("coin", 0)
+        val level = gamePref.getInt("level", 0)
 
-        binding.coinTv.text = "Coin: $coin"
-        binding.levelTv.text = "Level: $level"
+        val (finalCoin, finalLevel) = UserPrefManager.getCoinAndLevel(mapOf(
+            "coin" to coin,
+            "level" to level
+        ))
+
+        binding.coinTv.text = "Coin: $finalCoin"
+        binding.levelTv.text = "Level: $finalLevel"
+    }
+
+    private fun redirectToIdentity() {
+        startActivity(Intent(this, IdentityActivity::class.java))
+        finish()
     }
 }

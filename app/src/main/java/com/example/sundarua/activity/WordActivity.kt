@@ -2,8 +2,8 @@ package com.example.sundarua.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
@@ -25,28 +25,30 @@ class WordActivity : AppCompatActivity() {
         binding = ActivityWordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Tombol kembali ke MainActivity
+        backToMain()
+        setupRecyclerView()
+        setupSearchListener()
+        fetchWords()
+    }
+
+    private fun backToMain() {
         binding.backMainBtn.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            startActivity(intent)
-            finish()
+            navigateToMainActivity()
         }
+    }
 
-        // Setup RecyclerView
+    private fun setupRecyclerView() {
         binding.rvWords.layoutManager = LinearLayoutManager(this)
-        getData()
+    }
 
-        // Setup SearchView
+    private fun setupSearchListener() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean = false
+            override fun onQueryTextSubmit(query: String?) = false
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                lifecycleScope.launch {
-                    newText?.let {
-                        if (::adapter.isInitialized && listWord.isNotEmpty()) {
-                            adapter.filterList(it)
-                        }
+                newText?.let {
+                    if (::adapter.isInitialized && listWord.isNotEmpty()) {
+                        adapter.filterList(it)
                     }
                 }
                 return true
@@ -54,19 +56,35 @@ class WordActivity : AppCompatActivity() {
         })
     }
 
-    private fun getData() {
+    private fun fetchWords() {
+        showLoading(true)
         lifecycleScope.launch {
-            binding.progressBar.visibility = android.view.View.VISIBLE
             try {
                 val response = ApiClient.apiService.getWords()
                 listWord = response.words
                 adapter = WordAdapter(listWord)
                 binding.rvWords.adapter = adapter
             } catch (e: Exception) {
-                Toast.makeText(this@WordActivity, "Antosan sakedap nuju nampilkeun data", Toast.LENGTH_SHORT).show()
+                showToast("Antosan sakedap nuju nampilkeun data")
             } finally {
-                binding.progressBar.visibility = android.view.View.GONE
+                showLoading(false)
             }
         }
+    }
+
+    private fun navigateToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        }
+        startActivity(intent)
+        finish()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

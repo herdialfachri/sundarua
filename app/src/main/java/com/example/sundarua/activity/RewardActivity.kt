@@ -1,6 +1,5 @@
 package com.example.sundarua.activity
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
@@ -10,30 +9,36 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.sundarua.databinding.ActivityRewardBinding
 import com.example.sundarua.test.RewardHelper
 
-private val helper = RewardHelper()
-
 class RewardActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRewardBinding
+    private val helper = RewardHelper()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRewardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupRewardButtons()
+        setupBackButton()
+        showClaimHistory()
+    }
+
+    private fun setupRewardButtons() {
         binding.getBookBtn.setOnClickListener {
-            showConfirmationDialog(200, "Buku")
+            showConfirmationDialog(price = 200, itemName = "Buku")
         }
 
         binding.getPencilBtn.setOnClickListener {
-            showConfirmationDialog(100, "Pensil")
+            showConfirmationDialog(price = 100, itemName = "Pensil")
         }
+    }
 
-        showClaimHistory()
-
+    private fun setupBackButton() {
         binding.backMainBtn.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            val intent = Intent(this, MainActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            }
             startActivity(intent)
             finish()
         }
@@ -55,46 +60,38 @@ class RewardActivity : AppCompatActivity() {
     }
 
     private fun claimReward(price: Int, itemName: String) {
-        val sharedPref = getSharedPreferences("game_data", Context.MODE_PRIVATE)
-        val coin = sharedPref.getInt("coin", 0)
+        val currentCoin = helper.getCurrentCoin(this)
 
-        if (coin >= price) {
-            val newCoin = coin - price
-            sharedPref.edit().putInt("coin", newCoin).apply()
-
-            val code = helper.generateClaimCode()
-
-            val rewardPref = getSharedPreferences("reward_data", Context.MODE_PRIVATE)
-            val previousHistory = rewardPref.getStringSet("claim_history", setOf())?.toMutableSet() ?: mutableSetOf()
-            previousHistory.add(helper.formatClaimHistory(itemName, code))
-            rewardPref.edit().putStringSet("claim_history", previousHistory).apply()
-
-            Toast.makeText(this, "Hadiah $itemName atos dicandak!\nKode: $code", Toast.LENGTH_SHORT).show()
-
+        if (helper.canClaimReward(currentCoin, price)) {
+            helper.updateCoin(this, currentCoin - price)
+            helper.saveClaimHistory(this, itemName)
+            showSuccessToast(itemName)
             showClaimHistory()
         } else {
-            Toast.makeText(this, "Koin kanggo nukerkeun $itemName te cukup!", Toast.LENGTH_SHORT).show()
+            showInsufficientCoinToast(itemName)
         }
     }
 
     private fun showClaimHistory() {
         binding.claimHistoryLayout.removeAllViews()
 
-        val rewardPref = getSharedPreferences("reward_data", Context.MODE_PRIVATE)
-        val claimHistory = rewardPref.getStringSet("claim_history", setOf()) ?: setOf()
+        val claimHistory = helper.getClaimHistory(this)
+        val entries = if (claimHistory.isEmpty()) setOf("Teu acan aya hadiah") else claimHistory
 
-        if (claimHistory.isNotEmpty()) {
-            for (claim in claimHistory) {
-                val textView = TextView(this)
-                textView.text = claim
-                textView.textSize = 16f
-                binding.claimHistoryLayout.addView(textView)
+        for (entry in entries) {
+            val textView = TextView(this).apply {
+                text = entry
+                textSize = 16f
             }
-        } else {
-            val noClaimText = TextView(this)
-            noClaimText.text = "Teu acan aya hadiah"
-            noClaimText.textSize = 16f
-            binding.claimHistoryLayout.addView(noClaimText)
+            binding.claimHistoryLayout.addView(textView)
         }
+    }
+
+    private fun showSuccessToast(itemName: String) {
+        Toast.makeText(this, "Hadiah $itemName atos dicandak!", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showInsufficientCoinToast(itemName: String) {
+        Toast.makeText(this, "Koin kanggo nukerkeun $itemName te cukup!", Toast.LENGTH_SHORT).show()
     }
 }
