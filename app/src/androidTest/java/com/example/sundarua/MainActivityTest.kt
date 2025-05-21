@@ -23,11 +23,14 @@ class MainActivityTest {
 
     private lateinit var context: Context
 
+    private fun delay(ms: Long = 1500L) {
+        Thread.sleep(ms)
+    }
+
     @Before
     fun setUp() {
         context = InstrumentationRegistry.getInstrumentation().targetContext
 
-        // Bersihkan SharedPreferences sebelum test
         val userPref = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         userPref.edit().clear().commit()
 
@@ -36,103 +39,106 @@ class MainActivityTest {
     }
 
     @Test
-    fun whenUserNameExists_showsGreetingAndGameData() {
-        // Setup SharedPreferences user dan game data
+    fun whenUserNameExists_showsGreeting() {
         val userPref = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         userPref.edit().putString("user_name", "Ujang").commit()
 
         val gamePref = context.getSharedPreferences("game_data", Context.MODE_PRIVATE)
         gamePref.edit().putInt("coin", 100).putInt("level", 5).commit()
 
-        // Launch MainActivity
         ActivityScenario.launch(MainActivity::class.java)
+        delay()
 
-        // Cek greeting text
         onView(withId(R.id.greeting))
             .check(matches(withText("Sampurasun, Ujang!")))
 
-        // Cek coin text
         onView(withId(R.id.coinTv))
             .check(matches(withText("Coin: 100")))
 
-        // Cek level text
         onView(withId(R.id.levelTv))
             .check(matches(withText("Level: 5")))
+        delay()
     }
 
     @Test
-    fun whenUserNameNotExists_redirectsToIdentityActivity() {
-        // User prefs sudah kosong dari setUp()
-
+    fun whenUserNameNotExists_intentToIdentityActivity() {
         Intents.init()
 
         ActivityScenario.launch(MainActivity::class.java)
+        delay()
 
-        // Verifikasi intent ke IdentityActivity
         Intents.intended(hasComponent(IdentityActivity::class.java.name))
+        delay()
 
         Intents.release()
     }
 
     @Test
-    fun testNavigation_toWordActivity() {
+    fun testIntent_toWordActivity() {
         val userPref = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         userPref.edit().putString("user_name", "Ujang").commit()
 
         Intents.init()
         ActivityScenario.launch(MainActivity::class.java)
+        delay()
 
         onView(withId(R.id.toWordBtn)).perform(click())
         Intents.intended(hasComponent("com.example.sundarua.activity.WordActivity"))
+        delay()
 
         Intents.release()
     }
 
     @Test
-    fun testNavigation_toQuizActivity() {
+    fun testIntent_toQuizActivity() {
         val userPref = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         userPref.edit().putString("user_name", "Ujang").commit()
 
         Intents.init()
         ActivityScenario.launch(MainActivity::class.java)
+        delay()
 
         onView(withId(R.id.toQuizBtn)).perform(click())
         Intents.intended(hasComponent("com.example.sundarua.activity.QuizActivity"))
+        delay()
 
         Intents.release()
     }
 
     @Test
-    fun testNavigation_toAksaraActivity() {
+    fun testIntent_toAksaraActivity() {
         val userPref = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         userPref.edit().putString("user_name", "Ujang").commit()
 
         Intents.init()
         ActivityScenario.launch(MainActivity::class.java)
+        delay()
 
         onView(withId(R.id.toAksaraBtn)).perform(click())
         Intents.intended(hasComponent("com.example.sundarua.activity.AksaraActivity"))
+        delay()
 
         Intents.release()
     }
 
     @Test
-    fun testNavigation_toRewardActivity() {
+    fun testIntent_toRewardActivity() {
         val userPref = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         userPref.edit().putString("user_name", "Ujang").commit()
 
         Intents.init()
         ActivityScenario.launch(MainActivity::class.java)
+        delay()
 
         onView(withId(R.id.coinTv)).perform(click())
         Intents.intended(hasComponent("com.example.sundarua.activity.RewardActivity"))
+        delay()
 
         Intents.release()
     }
 
     @After
     fun tearDown() {
-        // Bersihkan SharedPreferences setelah test (opsional)
         val userPref = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         userPref.edit().clear().commit()
 

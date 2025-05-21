@@ -19,6 +19,10 @@ class IdentityActivityTest {
 
     private lateinit var context: Context
 
+    private fun delay(ms: Long = 1500L) {
+        Thread.sleep(ms)
+    }
+
     @Before
     fun setUp() {
         context = InstrumentationRegistry.getInstrumentation().targetContext
@@ -27,21 +31,27 @@ class IdentityActivityTest {
     }
 
     @Test
-    fun whenNameIsValid_navigatesToMainActivity() {
+    fun whenNameIsValid_intentToMainActivity() {
         ActivityScenario.launch(IdentityActivity::class.java)
 
         onView(withId(R.id.nameEditText)).perform(typeText("Ujang"))
+        delay()
         closeSoftKeyboard()
+
         onView(withId(R.id.saveNameButton)).perform(click())
+        delay()
     }
 
     @Test
-    fun whenNameWithSymbolIsValid_navigatesToMainActivity() {
+    fun whenNameWithSymbolIsValid_intentToMainActivity() {
         ActivityScenario.launch(IdentityActivity::class.java)
 
         onView(withId(R.id.nameEditText)).perform(typeText("Ujang!23"))
+        delay()
         closeSoftKeyboard()
+
         onView(withId(R.id.saveNameButton)).perform(click())
+        delay()
     }
 
     @Test
@@ -49,8 +59,13 @@ class IdentityActivityTest {
         ActivityScenario.launch(IdentityActivity::class.java)
 
         onView(withId(R.id.nameEditText)).perform(typeText("           "))
+        delay()
         closeSoftKeyboard()
+
         onView(withId(R.id.saveNameButton)).perform(click())
+        delay()
+
         onView(withId(R.id.nameEditText)).check(matches(hasErrorText("Nami henteu kénging kosong")))
+        delay()
     }
 }

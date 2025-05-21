@@ -20,22 +20,23 @@ class RewardActivityTest {
 
     private lateinit var context: Context
 
+    private fun delay(ms: Long = 1500L) {
+        Thread.sleep(ms)
+    }
+
     @Before
     fun setup() {
         context = ApplicationProvider.getApplicationContext()
 
-        // Simulasikan user memiliki cukup koin
         context.getSharedPreferences("game_data", Context.MODE_PRIVATE)
             .edit().putInt("coin", 300).apply()
 
-        // Bersihkan riwayat sebelumnya
         context.getSharedPreferences("reward_data", Context.MODE_PRIVATE)
             .edit().clear().apply()
     }
 
     @After
     fun cleanup() {
-        // Bersihkan setelah test
         context.getSharedPreferences("game_data", Context.MODE_PRIVATE)
             .edit().clear().apply()
         context.getSharedPreferences("reward_data", Context.MODE_PRIVATE)
@@ -45,54 +46,42 @@ class RewardActivityTest {
     @Test
     fun testClaimBookReward() {
         ActivityScenario.launch(RewardActivity::class.java)
-
-        // Klik tombol "Buku"
         onView(withId(R.id.getBookBtn)).perform(click())
+        delay()
 
-        // Klik "Leres" di dialog
         onView(withText("Leres")).perform(click())
+        delay()
 
-        // Tunggu sejenak agar UI sempat update
-        Thread.sleep(3000)
-
-        // Cek apakah history menampilkan entri reward
         onView(withText(containsString("Buku - Kode:"))).check(matches(isDisplayed()))
+        delay()
     }
 
     @Test
     fun testClaimPencilReward() {
         ActivityScenario.launch(RewardActivity::class.java)
-
-        // Klik tombol "Buku"
         onView(withId(R.id.getPencilBtn)).perform(click())
+        delay()
 
-        // Klik "Leres" di dialog
         onView(withText("Leres")).perform(click())
+        delay()
 
-        // Tunggu sejenak agar UI sempat update
-        Thread.sleep(3000)
-
-        // Cek apakah history menampilkan entri reward
         onView(withText(containsString("Pensil - Kode:"))).check(matches(isDisplayed()))
+        delay()
     }
 
     @Test
     fun testClaimInsufficientCoin() {
-        // Set coin hanya 50
         context.getSharedPreferences("game_data", Context.MODE_PRIVATE)
             .edit().putInt("coin", 50).apply()
 
         ActivityScenario.launch(RewardActivity::class.java)
-
-        // Klik tombol "Buku"
         onView(withId(R.id.getBookBtn)).perform(click())
+        delay()
 
-        // Klik "Leres" di dialog
         onView(withText("Leres")).perform(click())
+        delay()
 
-        Thread.sleep(3000)
-
-        // Cek bahwa tidak ada reward yang diklaim
         onView(withText("Teu acan aya hadiah")).check(matches(isDisplayed()))
+        delay()
     }
 }

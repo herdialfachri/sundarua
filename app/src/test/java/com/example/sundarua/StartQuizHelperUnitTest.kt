@@ -1,13 +1,14 @@
-package com.example.sundarua.test
+package com.example.sundarua
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.sundarua.test.StartQuizHelper
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.*
 
-class StartQuizUnitTest {
+class StartQuizHelperUnitTest {
 
     private lateinit var context: Context
     private lateinit var sharedPreferences: SharedPreferences
@@ -64,6 +65,6 @@ class StartQuizUnitTest {
         StartQuizHelper.saveCoinAndLevel(context, 150, 4)
         verify(editor).putInt("coin", 150)
         verify(editor).putInt("level", 4)
-        verify(editor).apply() // Because edit uses apply() internally
+        verify(editor).apply()
     }
 }

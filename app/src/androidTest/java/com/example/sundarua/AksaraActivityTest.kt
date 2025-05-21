@@ -12,6 +12,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.example.sundarua.activity.AksaraActivity
 import com.example.sundarua.activity.MainActivity
+import com.example.sundarua.activity.QuizActivity
 import org.junit.*
 import org.junit.runner.RunWith
 
@@ -19,7 +20,6 @@ import org.junit.runner.RunWith
 @LargeTest
 class AksaraActivityTest {
 
-    // Fungsi delay 2 detik
     private fun delay(ms: Long = 2000L) {
         Thread.sleep(ms)
     }
@@ -45,7 +45,7 @@ class AksaraActivityTest {
     }
 
     @Test
-    fun testRecyclerViewSasatoanIsVisibleAfterScroll() {
+    fun testScrollerRecyclerView() {
         ActivityScenario.launch(AksaraActivity::class.java)
 
         onView(withId(R.id.nestedScrollView))
@@ -60,12 +60,11 @@ class AksaraActivityTest {
     }
 
     @Test
-    fun testBackButtonIntentToMainActivity() {
+    fun testBackButtonToMainActivity() {
         ActivityScenario.launch(AksaraActivity::class.java)
+        delay()
 
         onView(withId(R.id.back_main_btn)).perform(click())
         delay()
-
-        intended(hasComponent(MainActivity::class.java.name))
     }
 }

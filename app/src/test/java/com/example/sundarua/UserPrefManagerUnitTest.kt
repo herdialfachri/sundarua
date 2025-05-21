@@ -25,7 +25,6 @@ class UserPrefManagerUnitTest {
         sharedPref = mock(SharedPreferences::class.java)
         editor = mock(SharedPreferences.Editor::class.java)
 
-        // Setup mock untuk SharedPreferences dan editor-nya
         `when`(context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)).thenReturn(sharedPref)
         `when`(sharedPref.edit()).thenReturn(editor)
         `when`(editor.putString(anyString(), anyString())).thenReturn(editor)

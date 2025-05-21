@@ -4,7 +4,7 @@ import com.example.sundarua.test.RewardHelper
 import org.junit.Assert.*
 import org.junit.Test
 
-class RewardActivityUnitTest {
+class RewardHelperUnitTest {
 
     private val helper = RewardHelper()
 
