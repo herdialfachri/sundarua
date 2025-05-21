@@ -1,9 +1,10 @@
-package com.example.sundarua.test
+package com.example.sundarua
 
+import com.example.sundarua.test.RewardHelper
 import org.junit.Assert.*
 import org.junit.Test
 
-class RewardHelperTest {
+class RewardActivityUnitTest {
 
     private val helper = RewardHelper()
 
