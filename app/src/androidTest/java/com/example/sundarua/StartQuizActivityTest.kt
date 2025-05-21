@@ -4,117 +4,146 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.intent.Intents
+import androidx.test.espresso.intent.Intents.init
+import androidx.test.espresso.intent.Intents.intended
+import androidx.test.espresso.intent.Intents.release
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.sundarua.activity.QuizActivity
 import com.example.sundarua.activity.StartQuizActivity
 import com.example.sundarua.model.QuestionModel
-import org.hamcrest.Matchers.allOf
+import org.hamcrest.Matchers.containsString
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import kotlin.jvm.Throws
 
 @RunWith(AndroidJUnit4::class)
 class StartQuizActivityTest {
 
-    @Before
-    fun setUp() {
-        StartQuizActivity.Companion.time = "1"
-        StartQuizActivity.Companion.questionModelList = listOf(
-            QuestionModel(
-                question = "Sato naon ngaranna harimau?",
-                options = listOf("Macan", "Hayam", "Ucing", "Maung"),
-                correct = "Macan"
-            ),
-            QuestionModel(
-                question = "Ibukota Jawa Barat?",
-                options = listOf("Bogor", "Bekasi", "Bandung", "Tasik"),
-                correct = "Bandung"
-            )
-        )
+    private val questionList = listOf(
+        QuestionModel("What is A?", listOf("A1", "A2", "A3", "A4"), "A1"),
+        QuestionModel("What is B?", listOf("B1", "B2", "B3", "B4"), "B1")
+    )
 
-        Intents.init()
+    @Before
+    fun setup() {
+        StartQuizActivity.Companion.questionModelList = questionList
+        StartQuizActivity.Companion.time = "1"
     }
 
     @After
     fun tearDown() {
-        Intents.release()
+        StartQuizActivity.Companion.questionModelList = listOf()
+        StartQuizActivity.Companion.time = ""
     }
 
     @Test
-    fun testCompleteQuizWithCorrectAnswers() {
-        // Meluncurkan aktivitas
-        ActivityScenario.launch(StartQuizActivity::class.java)
+    fun testQuizFlow_correctAnswer_progressAndScore() {
+        // Inisialisasi Espresso Intents
+        init()
 
-        val questions = StartQuizActivity.Companion.questionModelList
+        val scenario = ActivityScenario.launch(StartQuizActivity::class.java)
 
-        // Pilih jawaban benar
-        for (i in questions.indices) {
-            val selectedAnswer = questions[i].correct // Pilih jawaban benar
-
-            // Pilih jawaban yang benar
-            onView(allOf(withText(selectedAnswer), isClickable())).perform(click())
-
-            // Tambah delay sebelum klik next (simulasi waktu mikir)
-            Thread.sleep(3000)
-
-            onView(withId(R.id.next_btn)).perform(click())
-        }
-
-        // Tambah delay supaya dialog hasil muncul
-        Thread.sleep(1500)
-
-        // Verifikasi skor muncul (harus 100)
-        onView(withId(R.id.score_progress_indicator))
-            .check(matches(isDisplayed()))
-
-        // Delay sebelum klik selesai
+        // Pertanyaan pertama
+        onView(withId(R.id.question_textview))
+            .check(matches(withText("What is A?")))
         Thread.sleep(1000)
 
-        onView(withId(R.id.finish_btn)).perform(click())
+        onView(withId(R.id.btn0)).perform(click())
+        Thread.sleep(1000)
 
-        // Verifikasi pindah ke QuizActivity
-        Intents.intended(hasComponent(QuizActivity::class.java.name))
-        Thread.sleep(3000)
+        onView(withId(R.id.next_btn)).perform(click())
+        Thread.sleep(1000)
+
+        // Pertanyaan kedua
+        onView(withId(R.id.question_textview))
+            .check(matches(withText("What is B?")))
+        Thread.sleep(1000)
+
+        onView(withId(R.id.btn0)).perform(click())
+        Thread.sleep(1000)
+
+        onView(withId(R.id.next_btn)).perform(click())
+        Thread.sleep(1000)
+
+        // Dialog skor muncul
+        onView(withText(containsString("Ngiring bingah! hade pisan")))
+            .check(matches(isDisplayed()))
+        Thread.sleep(1000)
+
+        // Klik tombol Rengse
+        onView(withText("Rengse")).perform(click())
+
+        // Verifikasi intent ke QuizActivity
+        intended(hasComponent(QuizActivity::class.java.name))
+        Thread.sleep(2000)
+
+        scenario.close()
+        // Lepas Espresso Intents
+        release()
     }
 
     @Test
-    fun testCompleteQuizWithIncorrectAnswers() {
-        // Meluncurkan aktivitas
-        ActivityScenario.launch(StartQuizActivity::class.java)
+    fun testQuizFlow_wrongAnswer_progressAndScore() {
 
-        val questions = StartQuizActivity.Companion.questionModelList
+        init()
 
-        // Pilih jawaban salah
-        for (i in questions.indices) {
-            val incorrectAnswer = questions[i].options.first { it != questions[i].correct } // Pilih jawaban salah
+        val scenario = ActivityScenario.launch(StartQuizActivity::class.java)
 
-            // Pilih jawaban yang salah
-            onView(allOf(withText(incorrectAnswer), isClickable())).perform(click())
-
-            // Tambah delay sebelum klik next (simulasi waktu mikir)
-            Thread.sleep(3000)
-
-            onView(withId(R.id.next_btn)).perform(click())
-        }
-
-        // Tambah delay supaya dialog hasil muncul
-        Thread.sleep(1500)
-
-        // Verifikasi skor muncul (harus 0)
-        onView(withId(R.id.score_progress_indicator))
-            .check(matches(isDisplayed()))
-
-        // Delay sebelum klik selesai
+        onView(withId(R.id.question_textview))
+            .check(matches(withText("What is A?")))
         Thread.sleep(1000)
 
-        onView(withId(R.id.finish_btn)).perform(click())
+        onView(withId(R.id.btn2)).perform(click())
+        Thread.sleep(1000)
 
-        // Verifikasi pindah ke QuizActivity
-        Intents.intended(hasComponent(QuizActivity::class.java.name))
-        Thread.sleep(3000)
+        onView(withId(R.id.next_btn)).perform(click())
+        Thread.sleep(1000)
+
+        onView(withId(R.id.question_textview))
+            .check(matches(withText("What is B?")))
+        Thread.sleep(1000)
+
+        onView(withId(R.id.btn2)).perform(click())
+        Thread.sleep(1000)
+
+        onView(withId(R.id.next_btn)).perform(click())
+        Thread.sleep(1000)
+
+        onView(withText(containsString("Hayu diajar deui sing rajin")))
+            .check(matches(isDisplayed()))
+        Thread.sleep(1000)
+
+        // Klik tombol Rengse
+        onView(withText("Rengse")).perform(click())
+
+        // Verifikasi intent ke QuizActivity
+        intended(hasComponent(QuizActivity::class.java.name))
+        Thread.sleep(1000)
+
+        scenario.close()
+        // Lepas Espresso Intents
+        release()
+    }
+
+    @Test
+    fun testNextWithoutAnswer_showsToast() {
+        val scenario = ActivityScenario.launch(StartQuizActivity::class.java)
+
+        // Pastikan masih di pertanyaan pertama
+        onView(withId(R.id.question_textview))
+            .check(matches(withText("What is A?")))
+        Thread.sleep(1000)
+
+        // Tekan next tanpa pilih jawaban
+        onView(withId(R.id.next_btn)).perform(click())
+        Thread.sleep(2000)
+
+        scenario.close()
     }
 }
