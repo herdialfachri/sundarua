@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sundarua.adapter.QuizListAdapter
 import com.example.sundarua.databinding.ActivityQuizBinding
 import com.example.sundarua.model.QuizModel
-import com.example.sundarua.test.QuizFirebaseHelper
+import com.example.sundarua.test.FirebaseHelper
 
 class QuizActivity : AppCompatActivity() {
 
@@ -57,7 +57,7 @@ class QuizActivity : AppCompatActivity() {
     private fun loadQuizData() {
         binding.progressBar.visibility = View.VISIBLE
 
-        QuizFirebaseHelper.getQuizList { result ->
+        FirebaseHelper.getQuizList { result ->
             binding.progressBar.visibility = View.GONE
 
             if (result.success) {
