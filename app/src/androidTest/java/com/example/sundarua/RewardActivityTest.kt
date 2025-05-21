@@ -1,20 +1,15 @@
 package com.example.sundarua
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.intent.Intents.init
-import androidx.test.espresso.intent.Intents.intended
-import androidx.test.espresso.intent.Intents.release
-import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.sundarua.activity.MainActivity
 import com.example.sundarua.activity.RewardActivity
+import org.hamcrest.CoreMatchers.containsString
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -23,81 +18,81 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class RewardActivityTest {
 
-    private lateinit var userPref: SharedPreferences
-    private lateinit var gamePref: SharedPreferences
-    private lateinit var rewardPref: SharedPreferences
+    private lateinit var context: Context
 
     @Before
-    fun setUp() {
-        init()
+    fun setup() {
+        context = ApplicationProvider.getApplicationContext()
 
-        val context = ApplicationProvider.getApplicationContext<Context>()
+        // Simulasikan user memiliki cukup koin
+        context.getSharedPreferences("game_data", Context.MODE_PRIVATE)
+            .edit().putInt("coin", 300).apply()
 
-        // SharedPreferences untuk user info
-        userPref = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        userPref.edit()
-            .putString("user_name", "Test User")
-            .apply()
-
-        // SharedPreferences untuk game data
-        gamePref = context.getSharedPreferences("game_data", Context.MODE_PRIVATE)
-        gamePref.edit()
-            .putInt("coin", 100)
-            .apply()
-
-        // SharedPreferences untuk reward claim history
-        rewardPref = context.getSharedPreferences("reward_data", Context.MODE_PRIVATE)
-        rewardPref.edit()
-            .putStringSet("claim_history", emptySet())
-            .apply()
+        // Bersihkan riwayat sebelumnya
+        context.getSharedPreferences("reward_data", Context.MODE_PRIVATE)
+            .edit().clear().apply()
     }
 
     @After
-    fun tearDown() {
-        release()
-
-        userPref.edit().clear().apply()
-        gamePref.edit().clear().apply()
-        rewardPref.edit().clear().apply()
+    fun cleanup() {
+        // Bersihkan setelah test
+        context.getSharedPreferences("game_data", Context.MODE_PRIVATE)
+            .edit().clear().apply()
+        context.getSharedPreferences("reward_data", Context.MODE_PRIVATE)
+            .edit().clear().apply()
     }
 
     @Test
-    fun testBackToMainActivity() {
+    fun testClaimBookReward() {
         ActivityScenario.launch(RewardActivity::class.java)
-        onView(withId(R.id.back_main_btn)).perform(click())
-        intended(hasComponent(MainActivity::class.java.name))
-        Thread.sleep(2000)
-    }
 
-    @Test
-    fun testClickLeresBookWillDismissDialog() {
-        ActivityScenario.launch(RewardActivity::class.java)
+        // Klik tombol "Buku"
         onView(withId(R.id.getBookBtn)).perform(click())
+
+        // Klik "Leres" di dialog
         onView(withText("Leres")).perform(click())
+
+        // Tunggu sejenak agar UI sempat update
         Thread.sleep(3000)
+
+        // Cek apakah history menampilkan entri reward
+        onView(withText(containsString("Buku - Kode:"))).check(matches(isDisplayed()))
     }
 
     @Test
-    fun testClickSanesBookWillDismissDialog() {
+    fun testClaimPencilReward() {
         ActivityScenario.launch(RewardActivity::class.java)
+
+        // Klik tombol "Buku"
+        onView(withId(R.id.getPencilBtn)).perform(click())
+
+        // Klik "Leres" di dialog
+        onView(withText("Leres")).perform(click())
+
+        // Tunggu sejenak agar UI sempat update
+        Thread.sleep(3000)
+
+        // Cek apakah history menampilkan entri reward
+        onView(withText(containsString("Pensil - Kode:"))).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun testClaimInsufficientCoin() {
+        // Set coin hanya 50
+        context.getSharedPreferences("game_data", Context.MODE_PRIVATE)
+            .edit().putInt("coin", 50).apply()
+
+        ActivityScenario.launch(RewardActivity::class.java)
+
+        // Klik tombol "Buku"
         onView(withId(R.id.getBookBtn)).perform(click())
-        onView(withText("Sanes")).perform(click())
-        Thread.sleep(3000)
-    }
 
-    @Test
-    fun testClickLeresPencilWillDismissDialog() {
-        ActivityScenario.launch(RewardActivity::class.java)
-        onView(withId(R.id.getPencilBtn)).perform(click())
+        // Klik "Leres" di dialog
         onView(withText("Leres")).perform(click())
-        Thread.sleep(3000)
-    }
 
-    @Test
-    fun testClickSanesPencilWillDismissDialog() {
-        ActivityScenario.launch(RewardActivity::class.java)
-        onView(withId(R.id.getPencilBtn)).perform(click())
-        onView(withText("Sanes")).perform(click())
         Thread.sleep(3000)
+
+        // Cek bahwa tidak ada reward yang diklaim
+        onView(withText("Teu acan aya hadiah")).check(matches(isDisplayed()))
     }
 }

@@ -54,12 +54,6 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    //Testing library
-    testImplementation (libs.junit)
-    testImplementation (libs.robolectric)
-    testImplementation (libs.mockito.core)
-    testImplementation (libs.androidx.core)
-
     androidTestImplementation (libs.androidx.espresso.contrib)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
