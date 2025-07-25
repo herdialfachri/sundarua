@@ -25,15 +25,15 @@ class WordActivity : AppCompatActivity() {
         binding = ActivityWordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        backToMain()
+        setupBackButton()
         setupRecyclerView()
         setupSearchListener()
         fetchWords()
     }
 
-    private fun backToMain() {
+    private fun setupBackButton() {
         binding.backMainBtn.setOnClickListener {
-            navigateToMainActivity()
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 
@@ -70,14 +70,6 @@ class WordActivity : AppCompatActivity() {
                 showLoading(false)
             }
         }
-    }
-
-    private fun navigateToMainActivity() {
-        val intent = Intent(this, MainActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        }
-        startActivity(intent)
-        finish()
     }
 
     private fun showLoading(isLoading: Boolean) {

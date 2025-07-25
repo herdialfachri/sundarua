@@ -17,15 +17,17 @@ class MainActivity : AppCompatActivity() {
 
         installSplashScreen()
 
-        // Cek user
+        // cek apakah nama pengguna sudah tersedia
         if (!UserPrefManager.isUserNameAvailable(this)) {
             redirectToIdentity()
             return
         }
 
+        // view binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // pemanggilan fungsi
         setupGreeting()
         setupNavigation()
         updateCoinAndLevel()
@@ -33,14 +35,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
+        // pemanggilan fungsi
         updateCoinAndLevel()
     }
 
+    // fungsi untuk menampilkan nama pengguna
     private fun setupGreeting() {
         val name = UserPrefManager.getUserName(this) ?: return
         binding.greeting.text = UserPrefManager.getGreeting(name)
     }
 
+    // fungsi untuk navigasi ke halaman lain
     private fun setupNavigation() {
         binding.toWordBtn.setOnClickListener {
             startActivity(Intent(this, WordActivity::class.java))
@@ -59,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // fungsi untuk memperbarui coin dan level
     private fun updateCoinAndLevel() {
         val gamePref = getSharedPreferences("game_data", Context.MODE_PRIVATE)
 
@@ -74,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         binding.levelTv.text = "Level: $finalLevel"
     }
 
+    // fungsi mengalihkan halaman ke halaman identity
     private fun redirectToIdentity() {
         startActivity(Intent(this, IdentityActivity::class.java))
         finish()

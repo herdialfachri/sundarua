@@ -36,11 +36,7 @@ class RewardActivity : AppCompatActivity() {
 
     private fun setupBackButton() {
         binding.backMainBtn.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            }
-            startActivity(intent)
-            finish()
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 

@@ -1,6 +1,5 @@
 package com.example.sundarua.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -35,10 +34,7 @@ class QuizActivity : AppCompatActivity() {
 
     private fun setupBackButton() {
         binding.backMainBtn.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-            })
-            finish()
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 

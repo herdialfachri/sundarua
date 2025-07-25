@@ -32,8 +32,8 @@
         style="@style/whiteMediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
         android:textSize="@dimen/text_m"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -116,8 +116,8 @@
         app:layout_constraintStart_toStartOf="@+id/toWordBtn" />
 
     <Button
-        style="@style/whiteButton"
         android:id="@+id/toWordBtn"
+        style="@style/whiteButton"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_marginStart="16dp"

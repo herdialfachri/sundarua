@@ -1,6 +1,5 @@
 package com.example.sundarua.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -8,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sundarua.adapter.AksaraAdapter
 import com.example.sundarua.databinding.ActivityAksaraBinding
-import com.example.sundarua.test.FirebaseHelper
 import com.example.sundarua.model.AksaraModel
+import com.example.sundarua.test.FirebaseHelper
 
 class AksaraActivity : AppCompatActivity() {
 
@@ -86,10 +85,7 @@ class AksaraActivity : AppCompatActivity() {
 
     private fun setupBackButton() {
         binding.backMainBtn.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-            })
-            finish()
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 
