@@ -50,11 +50,42 @@ object FirebaseHelper {
             val quizList = mutableListOf<QuizModel>()
             if (snapshot.exists()) {
                 for (data in snapshot.children) {
-                    val quiz = data.getValue(QuizModel::class.java)
-                    if (quiz != null) {
-                        quizList.add(quiz)
+                    val id = data.child("id").getValue(String::class.java) ?: ""
+                    val title = data.child("title").getValue(String::class.java) ?: ""
+                    val subtitle = data.child("subtitle").getValue(String::class.java) ?: ""
+                    val time = data.child("time").getValue(String::class.java) ?: ""
+                    val questionList = mutableListOf<com.example.sundarua.model.QuestionModel>()
+
+                    val questionsSnapshot = data.child("questionList")
+                    for (q in questionsSnapshot.children) {
+                        val questionText = q.child("question").getValue(String::class.java) ?: ""
+                        val questionImageUrl = q.child("questionImageUrl").getValue(String::class.java) ?: ""
+                        val isImageQuestion = q.child("isImageQuestion").getValue(Boolean::class.java) ?: false
+                        val correct = q.child("correct").getValue(String::class.java) ?: ""
+                        val options = q.child("options").children.mapNotNull { it.getValue(String::class.java) }
+
+                        questionList.add(
+                            com.example.sundarua.model.QuestionModel(
+                                question = questionText,
+                                questionImageUrl = questionImageUrl,
+                                isImageQuestion = isImageQuestion,
+                                options = options,
+                                correct = correct
+                            )
+                        )
                     }
+
+                    val quiz = QuizModel(
+                        id = id,
+                        title = title,
+                        subtitle = subtitle,
+                        time = time,
+                        questionList = questionList
+                    )
+
+                    quizList.add(quiz)
                 }
+
                 callback(Result(true, quizList))
             } else {
                 callback(Result(true, emptyList()))

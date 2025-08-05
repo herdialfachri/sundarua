@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.sundarua.R
 import com.example.sundarua.databinding.ActivityStartQuizBinding
 import com.example.sundarua.databinding.ScoreDialogBinding
@@ -77,11 +78,28 @@ class StartQuizActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         val question = questionModelList[currentQuestionIndex]
+
         binding.apply {
             questionIndicatorTextview.text = "Question ${currentQuestionIndex + 1}/${questionModelList.size}"
             questionProgressIndicator.progress =
                 ((currentQuestionIndex.toFloat() / questionModelList.size) * 100).toInt()
+
+            // Tampilkan gambar jika ada
+            if (question.isImageQuestion && question.questionImageUrl.isNotBlank()) {
+                questionImageView.visibility = View.VISIBLE
+                Glide.with(this@StartQuizActivity)
+                    .load(question.questionImageUrl)
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .into(questionImageView)
+            } else {
+                questionImageView.visibility = View.GONE
+            }
+
+            // Selalu tampilkan teks soal
+            questionTextview.visibility = View.VISIBLE
             questionTextview.text = question.question
+
+            // Set jawaban
             btn0.text = question.options[0]
             btn1.text = question.options[1]
             btn2.text = question.options[2]
