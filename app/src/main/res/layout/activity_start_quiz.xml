@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     tools:text="What is android OS?"
                     android:textSize="@dimen/text_m"
-                    android:padding="8dp"
+                    android:padding="16dp"
                     android:background="@drawable/rounded_corner"
                     android:backgroundTint="@color/main_red"
                     android:gravity="center"
