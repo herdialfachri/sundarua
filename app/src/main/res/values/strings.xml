@@ -38,4 +38,6 @@
     <string name="aksara_ngalagena">Aksara Ngalagena</string>
     <string name="description">Description</string>
     <string name="koin">Koin</string>
+    <string name="salira">Salira</string>
+    <string name="barang">Barang</string>
 </resources>

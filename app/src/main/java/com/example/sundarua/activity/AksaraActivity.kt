@@ -19,15 +19,19 @@ class AksaraActivity : AppCompatActivity() {
     private val rarangkenList = ArrayList<AksaraModel>()
     private val angkaList = ArrayList<AksaraModel>()
     private val sasatoanList = ArrayList<AksaraModel>()
+    private val saliraList = ArrayList<AksaraModel>()
+    private val bandaList = ArrayList<AksaraModel>()
 
     private lateinit var ngalagenaAdapter: AksaraAdapter
     private lateinit var swaraAdapter: AksaraAdapter
     private lateinit var rarangkenAdapter: AksaraAdapter
     private lateinit var angkaAdapter: AksaraAdapter
     private lateinit var sasatoanAdapter: AksaraAdapter
+    private lateinit var saliraAdapter: AksaraAdapter
+    private lateinit var bandaAdapter: AksaraAdapter
 
     private var loadedDataCount = 0
-    private val totalDataNodes = 5
+    private val totalDataNodes = 7
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,12 +49,16 @@ class AksaraActivity : AppCompatActivity() {
         rarangkenAdapter = AksaraAdapter(rarangkenList)
         angkaAdapter = AksaraAdapter(angkaList)
         sasatoanAdapter = AksaraAdapter(sasatoanList)
+        saliraAdapter = AksaraAdapter(saliraList)
+        bandaAdapter = AksaraAdapter(bandaList)
 
         binding.recyclerViewNgalagena.setupHorizontal(ngalagenaAdapter)
         binding.recyclerViewSwara.setupHorizontal(swaraAdapter)
         binding.recyclerViewRarangken.setupHorizontal(rarangkenAdapter)
         binding.recyclerViewAngka.setupHorizontal(angkaAdapter)
         binding.recyclerViewSasatoan.setupHorizontal(sasatoanAdapter)
+        binding.recyclerViewSalira.setupHorizontal(saliraAdapter)
+        binding.recyclerViewBarang.setupHorizontal(bandaAdapter)
     }
 
     private fun loadAllData() {
@@ -68,6 +76,12 @@ class AksaraActivity : AppCompatActivity() {
         )
         FirebaseHelper.getAksaraData(
             "sasatoan", sasatoanList, sasatoanAdapter, ::onDataLoaded
+        )
+        FirebaseHelper.getAksaraData(
+            "salira", saliraList, saliraAdapter, ::onDataLoaded
+        )
+        FirebaseHelper.getAksaraData(
+            "banda", bandaList, bandaAdapter, ::onDataLoaded
         )
     }
 

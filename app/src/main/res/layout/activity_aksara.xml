@@ -23,8 +23,8 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="gone"
         android:padding="16dp"
+        android:visibility="gone"
         android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/frameBackBtn"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -105,11 +105,37 @@
                 android:id="@+id/recyclerViewSasatoan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                style="@style/blackMediumText"
+                android:textSize="@dimen/text_m"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/salira" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewSalira"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                style="@style/blackMediumText"
+                android:textSize="@dimen/text_m"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/barang" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewBarang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp" />
-
+                android:layout_marginBottom="16dp"/>
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
 
     <FrameLayout
@@ -138,7 +164,5 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/kosakata" />
-
     </FrameLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
