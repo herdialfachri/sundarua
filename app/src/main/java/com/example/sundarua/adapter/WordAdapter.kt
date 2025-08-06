@@ -16,7 +16,7 @@ class WordAdapter(private var list: List<Word>) : RecyclerView.Adapter<WordAdapt
         val baturText: TextView = view.findViewById(R.id.tvBatur)
         val lomaText: TextView = view.findViewById(R.id.tvLoma)
         val bindoText: TextView = view.findViewById(R.id.tvBindo)
-        val englishText: TextView = view.findViewById(R.id.tvEnglish)
+//        val englishText: TextView = view.findViewById(R.id.tvEnglish)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,7 +33,7 @@ class WordAdapter(private var list: List<Word>) : RecyclerView.Adapter<WordAdapt
         holder.baturText.text = word.batur
         holder.lomaText.text = word.loma
         holder.bindoText.text = word.bindo
-        holder.englishText.text = word.english
+//        holder.englishText.text = word.english
     }
 
     fun filterList(query: String) {
@@ -44,8 +44,8 @@ class WordAdapter(private var list: List<Word>) : RecyclerView.Adapter<WordAdapt
                 it.sorangan.contains(query, ignoreCase = true) ||
                         it.batur.contains(query, ignoreCase = true) ||
                         it.loma.contains(query, ignoreCase = true) ||
-                        it.bindo.contains(query, ignoreCase = true) ||
-                        it.english.contains(query, ignoreCase = true)
+                        it.bindo.contains(query, ignoreCase = true)
+//                        it.english.contains(query, ignoreCase = true)
             }
         }
         notifyDataSetChanged()

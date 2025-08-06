@@ -1,154 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:elevation="4dp"
-    android:layout_margin="4dp"
+    android:orientation="vertical"
     android:backgroundTint="@color/gray"
     app:cardCornerRadius="16dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="12dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/labelBindo"
+            android:textSize="@dimen/text_m"
+            style="@style/blackMediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:text="@string/b_indonesia" />
 
-            <TextView
-                android:id="@+id/labelSorangan"
-                android:textSize="@dimen/text_m"
-                style="@style/blackMediumText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sorangan"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tvBindo"
+            android:textSize="@dimen/text_m"
+            style="@style/blackRegularText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/labelBindo"
+            android:layout_marginStart="10dp"
+            tools:text="Bahasa Indonesia" />
 
-            <TextView
-                android:id="@+id/tvSorangan"
-                android:textSize="@dimen/text_m"
-                style="@style/blackRegularText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                tools:text="Sorangan"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/labelSorangan"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/labelSorangan"
+            android:textSize="@dimen/text_m"
+            style="@style/blackMediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sorangan"
+            android:layout_below="@id/labelBindo"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvSorangan"
+            android:textSize="@dimen/text_m"
+            style="@style/blackRegularText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/labelSorangan"
+            android:layout_alignTop="@id/labelSorangan"
+            tools:text="Sorangan" />
 
-            <TextView
-                android:id="@+id/labelBatur"
-                android:textSize="@dimen/text_m"
-                style="@style/blackMediumText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/batur"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/labelBatur"
+            android:textSize="@dimen/text_m"
+            style="@style/blackMediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/batur"
+            android:layout_below="@id/tvSorangan"/>
 
-            <TextView
-                android:id="@+id/tvBatur"
-                android:textSize="@dimen/text_m"
-                style="@style/blackRegularText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                tools:text="Batur"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/labelBatur"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tvBatur"
+            android:textSize="@dimen/text_m"
+            style="@style/blackRegularText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/labelBatur"
+            android:layout_alignTop="@id/labelBatur"
+            tools:text="Batur" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/labelLoma"
+            android:textSize="@dimen/text_m"
+            style="@style/blackMediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/labelBatur"
+            android:text="@string/loma" />
 
-            <TextView
-                android:id="@+id/labelLoma"
-                android:textSize="@dimen/text_m"
-                style="@style/blackMediumText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/loma"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tvLoma"
+            android:textSize="@dimen/text_m"
+            style="@style/blackRegularText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/labelLoma"
+            android:layout_alignTop="@id/labelLoma"
+            tools:text="Loma" />
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tvLoma"
-                android:textSize="@dimen/text_m"
-                style="@style/blackRegularText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                tools:text="Loma"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/labelLoma"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/labelBindo"
-                android:textSize="@dimen/text_m"
-                style="@style/blackMediumText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/b_indonesia"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvBindo"
-                android:textSize="@dimen/text_m"
-                style="@style/blackRegularText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                tools:text="Bahasa Indonesia"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/labelBindo"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/labelEnglish"
-                android:textSize="@dimen/text_m"
-                style="@style/blackMediumText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/inggris"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvEnglish"
-                android:textSize="@dimen/text_m"
-                style="@style/blackRegularText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                tools:text="English"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/labelEnglish"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#CCCCCC" />
+</LinearLayout>
