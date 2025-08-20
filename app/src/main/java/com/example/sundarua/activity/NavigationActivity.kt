@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.viewpager.widget.ViewPager
 import com.example.sundarua.R
 import com.example.sundarua.adapter.ViewPagerAdapter
@@ -36,6 +37,8 @@ class NavigationActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
 

@@ -15,8 +15,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        installSplashScreen()
-
         // cek apakah nama pengguna sudah tersedia
         if (!UserPrefManager.isUserNameAvailable(this)) {
             redirectToIdentity()

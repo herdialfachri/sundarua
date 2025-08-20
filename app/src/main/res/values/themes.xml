@@ -1,28 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Sundarua" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-
-        <!-- Set status bar color to transparent -->
+        <!-- Status bar -->
         <item name="android:statusBarColor">@color/main_red</item>
 
-        <!-- Set Poppins as default font for all TextViews -->
+        <!-- Default font -->
         <item name="android:textViewStyle">@style/PoppinsTextViewStyle</item>
-        <!-- Set Poppins Bold as default font for all Button -->
     </style>
 
     <style name="Theme.Sundarua" parent="Base.Theme.Sundarua" />
 
-    <!-- Base splash screen theme -->
+    <!-- Splash screen theme -->
     <style name="Theme.MyApp.Splash" parent="Theme.SplashScreen">
-        <!-- Optional: Set your splash screen background color -->
+        <!-- Background splash -->
         <item name="windowSplashScreenBackground">@color/secondary_red</item>
 
-        <!-- Optional: Set your splash screen icon -->
+        <!-- Icon / animasi -->
         <item name="windowSplashScreenAnimatedIcon">@drawable/animbg</item>
 
-        <!-- Optional: Set the duration the splash screen is shown -->
+        <!-- Setelah splash selesai, lanjut pakai tema utama -->
         <item name="postSplashScreenTheme">@style/Theme.Sundarua</item>
     </style>
 
@@ -32,5 +28,4 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">16sp</item>
     </style>
-
 </resources>
