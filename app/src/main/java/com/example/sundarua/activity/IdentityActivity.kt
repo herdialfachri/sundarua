@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.airbnb.lottie.LottieAnimationView
+import com.example.sundarua.R
 import com.example.sundarua.databinding.ActivityIdentityBinding
 import com.example.sundarua.test.UserPrefManager
 
@@ -15,6 +17,9 @@ class IdentityActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityIdentityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val lottieView = findViewById<LottieAnimationView>(R.id.lottieAnimationView)
+        lottieView.playAnimation()
 
         binding.saveNameButton.setOnClickListener {
             handleSaveName()

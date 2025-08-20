@@ -36,19 +36,19 @@
         android:layout_marginTop="@dimen/margin_24" />
 
     <!-- Avatar Image -->
-    <ImageView
-        android:id="@+id/avatarImg"
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_marginBottom="@dimen/margin_24"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/appTitle"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/nickname"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/nickname"
-        app:srcCompat="@drawable/animbg"
-        android:contentDescription="@string/avatar_description"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appTitle"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/burungunta" />
 
     <!-- Nickname Label -->
     <TextView

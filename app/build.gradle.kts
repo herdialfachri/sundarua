@@ -46,7 +46,8 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.picasso)
     implementation(libs.androidx.core.splashscreen)
-    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation(libs.glide)
+    implementation(libs.lottie)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -1,6 +1,5 @@
 package com.example.sundarua.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
