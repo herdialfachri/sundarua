@@ -41,11 +41,8 @@
     <string name="salira">Salira</string>
     <string name="barang">Barang</string>
 
-    <string name="screen1">Selamat Datang</string>
-    <string name="screen2">LMS UMMI</string>
-    <string name="screen3">UMMI Sukabumi</string>
-    <string name="screen1desc">Learning Management System (LMS) adalah platform digital yang memfasilitasi proses pembelajaran secara online.</string>
-    <string name="screen2desc">Learning Management System (LMS) UMMI mendukung pendidikan daring yang interaktif, efektif, dan efisien untuk semua.</string>
-    <string name="screen3desc">Universitas Muhammadiyah Sukabumi (UMMI) adalah perguruan tinggi yang mengedepankan pendidikan berkualitas dan berintegritas tinggi.</string>
-    <string name="startDesc">Create a long video or shorts and upload on youtube. Interact with your subscribers on youtube live.</string>
+    <string name="screen1">Wilujeung Sumping</string>
+    <string name="screen1desc">Basa Sunda Basa Urang Sadayana.</string>
+    <string name="screen2desc">Sundarua: Aplikasi Diajar Basa Sunda Pikeun Murid SDN Cisarua 1</string>
+    <string name="screen3desc">Makin loba elmu makin caang dunya.</string>
 </resources>

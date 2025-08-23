@@ -19,15 +19,15 @@ class ViewPagerAdapter(private val context: Context) : PagerAdapter() {
     )
 
     private val sliderAllTitle = intArrayOf(
-        R.string.screen1,
-        R.string.screen2,
-        R.string.screen3
-    )
-
-    private val sliderAllDesc = intArrayOf(
         R.string.screen1desc,
         R.string.screen2desc,
         R.string.screen3desc
+    )
+
+    private val sliderAllDesc = intArrayOf(
+        R.string.screen1,
+        R.string.screen1,
+        R.string.screen1
     )
 
     override fun getCount(): Int {

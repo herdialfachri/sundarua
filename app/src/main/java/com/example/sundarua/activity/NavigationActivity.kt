@@ -17,24 +17,10 @@ class NavigationActivity : AppCompatActivity() {
 
     private lateinit var slideViewPager: ViewPager
     private lateinit var dotIndicator: LinearLayout
-    private lateinit var backButton: Button
-    private lateinit var nextButton: Button
-    private lateinit var skipButton: Button
     private lateinit var dots: Array<TextView?>
     private lateinit var viewPagerAdapter: ViewPagerAdapter
-
-    private val viewPagerListener = object : ViewPager.OnPageChangeListener {
-        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-
-        override fun onPageSelected(position: Int) {
-            setDotIndicator(position)
-
-            backButton.visibility = if (position > 0) View.VISIBLE else View.INVISIBLE
-            nextButton.text = if (position == 2) "Finish" else "Next"
-        }
-
-        override fun onPageScrollStateChanged(state: Int) {}
-    }
+    private lateinit var buttonGuru: Button
+    private lateinit var buttonMurid: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -42,40 +28,32 @@ class NavigationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
 
-        backButton = findViewById(R.id.backButton)
-        nextButton = findViewById(R.id.nextButton)
-        skipButton = findViewById(R.id.skipButton)
-
-        backButton.setOnClickListener {
-            if (getItem(0) > 0) {
-                slideViewPager.setCurrentItem(getItem(-1), true)
-            }
-        }
-
-        nextButton.setOnClickListener {
-            if (getItem(0) < 2)
-                slideViewPager.setCurrentItem(getItem(1), true)
-            else {
-                val i = Intent(this@NavigationActivity, GetStartedActivity::class.java)
-                startActivity(i)
-                finish()
-            }
-        }
-
-        skipButton.setOnClickListener {
-            val i = Intent(this@NavigationActivity, MainActivity::class.java)
-            startActivity(i)
-            finish()
-        }
-
         slideViewPager = findViewById(R.id.slideViewPager)
         dotIndicator = findViewById(R.id.dotIndicator)
 
         viewPagerAdapter = ViewPagerAdapter(this)
         slideViewPager.adapter = viewPagerAdapter
 
+        // Tambahkan listener untuk update dot
+        slideViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+
+            override fun onPageSelected(position: Int) {
+                setDotIndicator(position)
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {}
+        })
+
         setDotIndicator(0)
-        slideViewPager.addOnPageChangeListener(viewPagerListener)
+
+        buttonGuru = findViewById(R.id.guruBtn)
+        buttonMurid = findViewById(R.id.muridBtn)
+
+        buttonMurid.setOnClickListener {
+            val intent = Intent(this, IdentityActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setDotIndicator(position: Int) {
@@ -86,11 +64,11 @@ class NavigationActivity : AppCompatActivity() {
             dots[i] = TextView(this).apply {
                 text = Html.fromHtml("&#8226", Html.FROM_HTML_MODE_LEGACY)
                 textSize = 35f
-                setTextColor(resources.getColor(R.color.secondary_red, applicationContext.theme))
+                setTextColor(resources.getColor(R.color.very_light_gray, applicationContext.theme))
             }
             dotIndicator.addView(dots[i])
         }
-        dots[position]?.setTextColor(resources.getColor(R.color.white, applicationContext.theme))
+        dots[position]?.setTextColor(resources.getColor(R.color.main_red, applicationContext.theme))
     }
 
     private fun getItem(i: Int): Int {
